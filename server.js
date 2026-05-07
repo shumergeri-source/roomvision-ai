@@ -5,6 +5,7 @@ const https = require("https");
 
 const PORT = process.env.PORT || 3000;
 const SERPAPI_KEY = process.env.SERPAPI_KEY;
+const OPENROUTER_KEY = process.env.OPENROUTER_KEY || '';
 
 function serpApiFetch(params) {
   return new Promise((resolve, reject) => {
@@ -39,7 +40,9 @@ const server = http.createServer(async (req, res) => {
 
   // Serve index.html
   if (parsed.pathname === "/" || parsed.pathname === "/index.html") {
-    const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+    let html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+    // Inject API key from environment variable
+    html = html.replace('OPENROUTER_API_KEY_HERE', OPENROUTER_KEY);
     res.writeHead(200, { "Content-Type": "text/html" });
     return res.end(html);
   }
