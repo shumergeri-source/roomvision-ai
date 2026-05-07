@@ -1,12 +1,14 @@
 services:
   - type: web
-    name: roomvision-ai
+    name: roomvision
     runtime: node
-    buildCommand: npm install
-    startCommand: npm start
     plan: free
+    buildCommand: echo "No build needed"
+    startCommand: node server.js
     envVars:
-      - key: SERPAPI_KEY
-        sync: false
       - key: OPENROUTER_KEY
         sync: false
+      - key: SERPAPI_KEY
+        sync: false
+      - key: PORT
+        value: "10000"
