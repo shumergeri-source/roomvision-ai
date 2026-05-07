@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: roomvision-ai
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: SERPAPI_KEY
+        sync: false
+      - key: OPENROUTER_KEY
+        sync: false
