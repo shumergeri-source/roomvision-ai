@@ -1,0 +1,4679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoomEdit Pro — AI-Powered Design Studio for Professionals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ============================================
+   RoomEdit Pro — AI-Powered Design Studio for Professionals
+   ============================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #fefcfa;
+  --bg-secondary: #f7f4f0;
+  --bg-tertiary: #f0ece7;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.10);
+  --accent: #b07d8e;
+  --accent-light: #c99aaa;
+  --accent-dark: #8e5f6e;
+  --accent-glow: rgba(176, 125, 142, 0.10);
+  --accent-glow-strong: rgba(176, 125, 142, 0.20);
+  --text-primary: #1a1a1a;
+  --text-secondary: rgba(26, 26, 26, 0.58);
+  --text-tertiary: rgba(26, 26, 26, 0.35);
+  --success: #5cb97a;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-med: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.20); }
+
+/* --- Utility --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Navigation --- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 24px;
+  transition: var(--transition-med);
+}
+
+.nav.scrolled {
+  background: rgba(254, 252, 250, 0.88);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-cta {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: white !important;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all var(--transition-fast);
+}
+
+.nav-cta:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 24px 80px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--bg-primary), transparent);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(176, 125, 142, 0.2);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 28px;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hero h1 {
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 460px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--accent-glow-strong);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.18);
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.hero-mockup {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+  aspect-ratio: 4/3;
+  background: var(--bg-secondary);
+}
+
+.hero-mockup img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-mockup-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.hero-mockup-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.hero-mockup-badge svg {
+  color: var(--accent);
+}
+
+.hero-float-card {
+  position: absolute;
+  top: -20px;
+  right: -30px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  animation: float 6s ease-in-out infinite;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.hero-float-card .stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.hero-float-card .stat-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* --- Footer --- */
+.footer {
+  padding: 60px 24px 32px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* --- Animations --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Toast --- */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  z-index: 9999;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all var(--transition-med);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-icon {
+  color: var(--success);
+  font-size: 16px;
+}
+
+/* ============================================
+   Design Studio Section
+   ============================================ */
+
+.studio-section {
+  padding: 100px 0 80px;
+  background: var(--bg-secondary);
+  position: relative;
+}
+
+.studio-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+
+.studio-section .section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.studio-section .section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.studio-section .section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+/* Studio Room Upload */
+.studio-upload-area {
+  border: 2px dashed var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 48px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-med);
+  background: var(--bg-card);
+  position: relative;
+}
+
+.studio-upload-area:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.studio-upload-area.drag-over {
+  border-color: var(--accent);
+  background: var(--accent-glow-strong);
+  transform: scale(1.01);
+}
+
+.studio-upload-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.studio-upload-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.studio-upload-hint {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+/* Current Room Display */
+.current-room {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.current-room img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  margin: 0 auto;
+  object-fit: contain;
+  max-height: none;
+}
+
+.current-room-label {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Design Timeline */
+.design-timeline {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 16px 0;
+  margin: 0 0 32px;
+  align-items: center;
+  scrollbar-width: thin;
+}
+
+.design-timeline::-webkit-scrollbar { height: 4px; }
+.design-timeline::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
+
+.timeline-entry {
+  flex-shrink: 0;
+  width: 120px;
+  text-align: center;
+  position: relative;
+}
+
+.timeline-thumb {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.timeline-thumb:hover {
+  border-color: var(--accent-light);
+}
+
+.timeline-entry.current .timeline-thumb {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px var(--accent-glow-strong);
+}
+
+.timeline-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.3;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: 18px;
+  flex-shrink: 0;
+  padding: 0 2px;
+}
+
+.timeline-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition-fast);
+  z-index: 2;
+}
+
+.timeline-entry:hover .timeline-remove {
+  opacity: 1;
+}
+
+/* Change Type Buttons */
+.change-type-heading {
+  margin-bottom: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.change-type-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.change-type-btn {
+  padding: 12px 20px;
+  border: 2px solid rgba(176,125,142,0.2);
+  border-radius: var(--radius-md);
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--font);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.change-type-btn:hover {
+  border-color: var(--accent-light);
+  color: var(--text-primary);
+}
+
+.change-type-btn.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(160,112,96,0.3);
+  transform: translateY(-1px);
+}
+
+/* Change Panels */
+.change-panel {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  animation: fadeInUp 0.3s ease;
+}
+
+.change-panel.active {
+  display: block;
+}
+
+/* Form Fields */
+.studio-field-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  margin-top: 16px;
+}
+
+.studio-field-label:first-child {
+  margin-top: 0;
+}
+
+.studio-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(176,125,142,0.2);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  outline: none;
+}
+
+.studio-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.studio-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.studio-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(176,125,142,0.2);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  outline: none;
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+.studio-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.studio-textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Item Upload (small) */
+.studio-item-upload {
+  border: 2px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  background: rgba(255,255,255,0.3);
+}
+
+.studio-item-upload:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.studio-item-upload.drag-over {
+  border-color: var(--accent);
+  background: var(--accent-glow-strong);
+}
+
+.studio-item-upload.has-image {
+  padding: 8px;
+  border-style: solid;
+  border-color: var(--accent-light);
+}
+
+.studio-item-preview {
+  max-width: 200px;
+  max-height: 160px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.studio-item-upload-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.studio-item-upload-icon {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+  opacity: 0.5;
+}
+
+/* Placement Suggestions */
+.suggest-placement-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--accent-glow-strong), var(--accent-glow));
+  border: 1px solid rgba(176, 125, 142, 0.3);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font);
+  margin-top: 6px;
+}
+
+.suggest-placement-btn:hover {
+  background: linear-gradient(135deg, rgba(176, 125, 142, 0.28), rgba(176, 125, 142, 0.18));
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.suggest-placement-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.suggest-placement-btn .suggest-spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(176, 125, 142, 0.3);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.suggest-placement-btn.loading .suggest-spinner {
+  display: inline-block;
+}
+
+.suggest-placement-btn.loading .suggest-icon {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.placement-suggestions {
+  margin-top: 12px;
+  display: none;
+}
+
+.placement-suggestions.active {
+  display: block;
+}
+
+.placement-suggestions-heading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.suggestion-card {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: 8px;
+}
+
+.suggestion-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.suggestion-card.selected {
+  border-color: var(--accent);
+  background: var(--accent-glow-strong);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.suggestion-card-location {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.suggestion-card-reason {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Dimensions */
+.studio-dimensions {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.dim-field {
+  flex: 1;
+  min-width: 80px;
+}
+
+.dim-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dim-field input {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(176,125,142,0.2);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.dim-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.studio-check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.studio-check-label input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* Color Swatches */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.color-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: var(--transition-fast);
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.color-swatch:hover {
+  transform: scale(1.15);
+  border-color: var(--accent);
+}
+
+.color-swatch.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--accent);
+}
+
+.color-swatch-label {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.color-swatch:hover .color-swatch-label {
+  opacity: 1;
+}
+
+/* Flooring Options */
+.flooring-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.flooring-opt {
+  padding: 10px 14px;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(176,125,142,0.15);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: center;
+}
+
+.flooring-opt:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--text-primary);
+}
+
+.flooring-opt.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  font-weight: 700;
+  transform: scale(1.05);
+  box-shadow: 0 3px 12px rgba(160,112,96,0.35);
+}
+.flooring-opt.selected::after {
+  content: ' ✓';
+  font-weight: 700;
+}
+.floor-selection-confirm {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  min-height: 20px;
+}
+
+/* Style Options (Complete Redesign) */
+.style-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 12px 0;
+}
+.style-opt {
+  text-align: center;
+  padding: 14px 8px;
+  border: 2px solid rgba(160,112,96,0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+.style-opt:hover {
+  border-color: var(--accent);
+  background: rgba(160,112,96,0.05);
+}
+.style-opt.selected {
+  border-color: var(--accent);
+  background: rgba(160,112,96,0.12);
+}
+.style-opt-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+.style-opt-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Room Dimensions Input */
+.room-dims {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+.room-dims .dim-field {
+  flex: 1;
+}
+.room-dims .dim-field label {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 4px;
+}
+.room-dims .dim-field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(160,112,96,0.3);
+  border-radius: 8px;
+  font-size: 13px;
+  background: white;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .style-options { grid-template-columns: repeat(3, 1fr); }
+  .room-dims { flex-direction: column; }
+}
+
+/* Manufacturers */
+.btn-manufacturers {
+  margin-top: 16px;
+  background: white;
+  border: 2px solid rgba(160,112,96,0.3);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+}
+.btn-manufacturers:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.manufacturers-panel {
+  max-width: 720px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.mfr-header h3 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  color: #333;
+}
+.mfr-header p {
+  margin: 0 0 20px 0;
+  font-size: 13px;
+  color: #888;
+}
+.mfr-list {
+  margin-bottom: 16px;
+}
+.mfr-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #faf5f0;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.mfr-item-info {
+  flex: 1;
+}
+.mfr-item-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+.mfr-item-url {
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.mfr-item-url:hover { text-decoration: underline; }
+.mfr-item-cat {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+.mfr-item-remove {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+}
+.mfr-item-remove:hover { color: #e74c3c; }
+.mfr-add-form {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 16px;
+}
+.btn-add-mfr {
+  margin-top: 10px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-add-mfr:hover { opacity: 0.9; }
+
+/* Designer Notes Area */
+.designer-notes-area {
+  margin-top: 20px;
+}
+
+/* Apply Button */
+.btn-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 32px;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-med);
+  margin-top: 20px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 16px rgba(176,125,142,0.3);
+}
+
+.btn-apply:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(176,125,142,0.4);
+}
+
+.btn-apply:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading Overlay */
+.studio-loading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.studio-loading.active {
+  display: flex;
+}
+
+.loading-spinner {
+  width: 64px;
+  height: 64px;
+  border: 4px solid #f0ebe6;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-msg {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+  animation: loadPulse 2s ease-in-out infinite;
+}
+
+.loading-hint {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: -8px;
+}
+
+@keyframes loadPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Review Section */
+.change-review {
+  display: none;
+  margin: 32px 0;
+  animation: fadeInUp 0.5s ease;
+}
+
+.change-review.active {
+  display: block;
+}
+
+.review-heading {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.review-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: start;
+}
+
+.review-side {
+  text-align: center;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: visible;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+}
+
+.review-side img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  height: auto;
+  max-height: none;
+}
+
+.review-side-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  z-index: 2;
+}
+
+.review-side-label.before-label {
+  background: rgba(0,0,0,0.6);
+  color: white;
+}
+
+.review-side-label.after-label {
+  background: var(--accent);
+  color: white;
+}
+
+/* Scale Check Card */
+.scale-check-card {
+  border-radius: var(--radius-md);
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.scale-check-card.scale-good {
+  background: rgba(92, 185, 122, 0.08);
+  border: 1px solid rgba(92, 185, 122, 0.25);
+  color: #2d6a3f;
+}
+
+.scale-check-card.scale-concern {
+  background: rgba(220, 160, 50, 0.08);
+  border: 1px solid rgba(220, 160, 50, 0.25);
+  color: #7a5b1f;
+}
+
+/* Review Action Buttons */
+.review-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-keep {
+  background: #27ae60;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-keep:hover {
+  background: #219a52;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.btn-discard {
+  background: #e74c3c;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-discard:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+.btn-retry {
+  background: #f39c12;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-retry:hover {
+  background: #d68910;
+  transform: translateY(-1px);
+}
+
+/* Product Suggestions */
+.btn-products {
+  background: linear-gradient(135deg, #a07060, #c49080);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  font-family: var(--font);
+}
+.btn-products:hover {
+  transform: scale(1.02);
+}
+
+.shop-for-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.shop-for-label {
+  font-weight: 700;
+  font-size: 15px;
+  color: #333;
+}
+.shop-for-input {
+  padding: 10px 16px;
+  border: 2px solid #e0d5cc;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 260px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.shop-for-input:focus {
+  border-color: #a07060;
+}
+.btn-rating {
+  background: linear-gradient(135deg, #f9d423, #ff4e50);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-rating:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 78, 80, 0.3);
+}
+.rating-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 20px;
+  text-align: left;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.rating-score {
+  font-size: 48px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.rating-score.high { color: #27ae60; }
+.rating-score.medium { color: #f39c12; }
+.rating-score.low { color: #e74c3c; }
+.rating-label {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+.rating-category {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0ebe6;
+}
+.rating-category:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.rating-category h4 {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  color: #333;
+}
+.rating-category .cat-score {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.rating-category p {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+.rating-suggestions {
+  background: #f8f4f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+.rating-suggestions h4 {
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  color: #a07060;
+}
+.rating-suggestions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.rating-suggestions li {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+/* Real product results (SerpAPI) */
+.serp-item-group {
+  margin-top: 28px;
+  text-align: left;
+}
+.serp-item-group-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+}
+.serp-item-group-desc {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+.serp-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.serp-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.serp-card:hover {
+  border-color: rgba(160,112,96,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+}
+.serp-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #faf8f6;
+  padding: 12px;
+}
+.serp-card-body {
+  padding: 14px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.serp-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.serp-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.serp-card-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #a07060;
+}
+.serp-card-source {
+  font-size: 11px;
+  color: #999;
+  text-align: right;
+  max-width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.serp-card-rating {
+  font-size: 12px;
+  color: #d4a017;
+}
+.serp-card-rating .serp-count {
+  color: #aaa;
+  font-size: 11px;
+}
+.serp-card-actions {
+  padding: 0 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+}
+.serp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s;
+  line-height: 1.3;
+  font-family: var(--font);
+}
+.serp-btn-primary {
+  background: linear-gradient(135deg, #a07060, #c09585);
+  color: white;
+}
+.serp-btn-primary:hover {
+  background: linear-gradient(135deg, #8e5f50, #a07060);
+}
+.serp-btn-secondary {
+  background: #f0ebe6;
+  color: #a07060;
+  border: 1px solid rgba(160,112,96,0.15);
+}
+.serp-btn-secondary:hover {
+  background: #e8e0d8;
+  color: #8e5f50;
+}
+.serp-btn-loading {
+  background: #f5f0eb;
+  color: #bbb;
+  cursor: default;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.serp-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ddd;
+  border-top-color: #a07060;
+  border-radius: 50%;
+  animation: serp-spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+@keyframes serp-spin { to { transform: rotate(360deg); } }
+
+/* Skeleton loading for real products */
+.serp-skeleton-card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.serp-skeleton-img {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(90deg, #f0ebe6 25%, #f8f4f0 50%, #f0ebe6 75%);
+  background-size: 200% 100%;
+  animation: serp-shimmer 1.5s infinite;
+}
+.serp-skeleton-body { padding: 14px 16px; }
+.serp-skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f0ebe6 25%, #f8f4f0 50%, #f0ebe6 75%);
+  background-size: 200% 100%;
+  animation: serp-shimmer 1.5s infinite;
+  margin-bottom: 10px;
+}
+.serp-skeleton-line:nth-child(2) { width: 60%; }
+.serp-skeleton-line:nth-child(3) { width: 40%; height: 20px; }
+@keyframes serp-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Start Over */
+.btn-start-over {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: none;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-start-over:hover {
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero-float-card {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .studio-section {
+    padding: 60px 0 50px;
+  }
+
+  .review-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .change-type-buttons {
+    justify-content: center;
+  }
+
+  .studio-dimensions {
+    flex-direction: column;
+  }
+
+  .dim-field {
+    min-width: 100%;
+  }
+
+  .timeline-entry { width: 90px; }
+  .timeline-thumb { width: 90px; height: 60px; }
+
+  .flooring-options {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .product-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .review-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-keep, .btn-discard, .btn-retry {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .change-panel {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary, .btn-secondary {
+    justify-content: center;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   My Projects
+   ============================================ */
+.btn-projects {
+  margin-top: 16px;
+  background: white;
+  border: 2px solid rgba(160,112,96,0.3);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s;
+}
+.btn-projects:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.projects-panel {
+  max-width: 720px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.projects-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.projects-topbar h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  flex: 1;
+}
+
+.btn-save-project {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-save-project:hover { opacity: 0.9; }
+.btn-save-project:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-new-folder {
+  background: #f0ebe6;
+  color: #a07060;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-new-folder:hover { background: #e8ddd5; }
+
+/* Save Dialog */
+.save-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInUp 0.2s ease;
+}
+.save-dialog {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  width: 420px;
+  max-width: 90vw;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+.save-dialog h3 {
+  margin: 0 0 18px 0;
+  font-size: 18px;
+  color: #333;
+}
+.save-dialog label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+.save-dialog label:first-of-type {
+  margin-top: 0;
+}
+.save-dialog input,
+.save-dialog select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(160,112,96,0.25);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.save-dialog input:focus,
+.save-dialog select:focus {
+  border-color: var(--accent);
+}
+.save-dialog-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+.save-dialog-actions button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font);
+}
+.save-dialog-actions .btn-save-confirm {
+  background: var(--accent);
+  color: white;
+}
+.save-dialog-actions .btn-save-confirm:hover { opacity: 0.9; }
+.save-dialog-actions .btn-save-cancel {
+  background: #f0ebe6;
+  color: #666;
+}
+.save-dialog-actions .btn-save-cancel:hover { background: #e5ddd5; }
+
+/* Folder sections */
+.project-folder-section {
+  margin-bottom: 16px;
+}
+.project-folder-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #faf5f0;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.project-folder-header:hover {
+  background: #f0ebe6;
+}
+.project-folder-arrow {
+  font-size: 11px;
+  color: #999;
+  transition: transform 0.2s;
+}
+.project-folder-arrow.expanded {
+  transform: rotate(90deg);
+}
+.project-folder-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+}
+.project-folder-count {
+  font-size: 12px;
+  color: #999;
+  font-weight: 500;
+}
+.project-folder-delete {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+.project-folder-delete:hover { color: #e74c3c; }
+
+.project-folder-body {
+  padding: 10px 0 0 0;
+}
+
+/* Project cards grid */
+.project-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.project-card-item {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.project-card-item:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+.project-card-item.active-project {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow-strong), 0 4px 16px rgba(0,0,0,0.1);
+}
+.project-card-thumb {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  background: #f0ebe6;
+  display: block;
+}
+.project-card-info {
+  padding: 10px 12px;
+}
+.project-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.project-card-date {
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 8px;
+}
+.project-card-actions {
+  display: flex;
+  gap: 6px;
+}
+.project-card-actions button {
+  flex: 1;
+  padding: 6px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: opacity 0.2s;
+}
+.project-card-actions button:hover { opacity: 0.85; }
+.project-card-actions .btn-open-project {
+  background: var(--accent);
+  color: white;
+}
+.project-card-actions .btn-move-project {
+  background: #f0ebe6;
+  color: #a07060;
+}
+.project-card-actions .btn-delete-project {
+  background: #fde8e8;
+  color: #e74c3c;
+}
+
+.projects-empty {
+  text-align: center;
+  padding: 24px;
+  color: #999;
+  font-size: 13px;
+}
+
+/* Current project indicator */
+.current-project-indicator {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.current-project-name {
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+.unsaved-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #fff3e0;
+  color: #e67e22;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .project-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .projects-topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .projects-topbar h3 { text-align: center; }
+}
+@media (max-width: 480px) {
+  .project-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10022;</text></svg>">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#a07060">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="RoomEdit Pro">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">&#10022;</div>
+        RoomEdit Pro
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-cta" style="pointer-events:none; opacity:0.7;">AI-Powered Design Studio</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== DESIGN STUDIO ===== -->
+  <section class="studio-section" id="studio" style="padding-top: 40px;">
+    <div class="container">
+      <div id="studioHeader" style="text-align:center; margin-bottom: 32px;">
+        <div class="hero-badge" style="display:inline-flex; margin-bottom: 16px;">
+          <span class="hero-badge-dot"></span>
+          Built for Interior Designers
+        </div>
+        <h1 style="font-size:clamp(2rem,5vw,3.2rem); font-weight:800; line-height:1.1; margin:0 0 16px 0; color:#1a1a2e;">
+          Your Design Vision,
+          <span class="gradient-text">Client-Ready in Minutes</span>
+        </h1>
+        <p style="max-width:600px; margin:0 auto 24px; font-size:1.05rem; line-height:1.6; color:#666;">
+          Upload your client's space, layer in changes one at a time &mdash; furniture, finishes, flooring &mdash; 
+          and present a polished redesign they can approve on the spot.
+        </p>
+
+        <!-- Quick Guide -->
+        <div style="max-width:640px; margin:0 auto 28px; background:white; border-radius:16px; padding:24px 28px; text-align:left; box-shadow:0 2px 16px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.05);">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; cursor:pointer;" onclick="var el=document.getElementById('guideList');var arr=this.querySelector('.guide-arrow');if(el.style.display==='none'){el.style.display='block';arr.style.transform='rotate(90deg)';}else{el.style.display='none';arr.style.transform='rotate(0deg)';}">
+            <span style="font-size:18px;">📋</span>
+            <span style="font-weight:700; font-size:15px; color:#333;">What You Can Do</span>
+            <span class="guide-arrow" style="margin-left:auto; font-size:12px; color:#999; transition:transform 0.2s;">▶</span>
+          </div>
+          <div id="guideList" style="display:block;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 24px;">
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">🪑</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Place Items</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Add furniture, fixtures, or decor into the room</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">🎨</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Change Walls</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Try new paint colors, wallpaper, or accent walls</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">🪵</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Swap Flooring</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Hardwood, tile, carpet &mdash; see it instantly</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">✏️</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Custom Changes</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Describe any edit &mdash; lighting, layout, details</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">🏠</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Complete Redesign</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Restyle the entire room &mdash; 12 preset styles or your own</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">🛍️</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Shop For Products</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Find real products that match your design at 3 budget levels</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">⭐</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Rate Your Design</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Get a professional score on cohesion, scale, color &amp; more</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:16px; flex-shrink:0;">🏭</span>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:#333;">Save Manufacturers</div>
+                  <div style="font-size:12px; color:#888; line-height:1.4;">Add your preferred vendors &mdash; product links go to them first</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:16px; padding-top:14px; border-top:1px solid #f0ebe6; font-size:12px; color:#999; line-height:1.5;">
+              <strong style="color:#666;">How it works:</strong> Upload a room photo → make changes one at a time → each edit builds on the last → undo anytime → shop for matching products → rate the final result
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-manufacturers" onclick="toggleManufacturers()">🏭 My Manufacturers</button>
+        <button class="btn-projects" onclick="toggleProjects()">📁 My Projects</button>
+      </div>
+
+      <!-- Current Project Indicator -->
+      <div id="currentProjectIndicator" class="current-project-indicator" style="display:none;">
+        📐 Working on: <span id="currentProjectName" class="current-project-name"></span>
+        <span id="unsavedBadge" class="unsaved-badge" style="display:none;">unsaved changes</span>
+      </div>
+
+      <!-- Projects Panel -->
+      <div id="projectsPanel" class="projects-panel" style="display:none;">
+        <div class="projects-topbar">
+          <h3>My Projects</h3>
+          <button class="btn-new-folder" onclick="createProjectFolder()">+ New Folder</button>
+          <button id="btnSaveProject" class="btn-save-project" onclick="openSaveDialog()">Save Current Work</button>
+        </div>
+        <div id="projectsListArea"></div>
+      </div>
+
+      <!-- Manufacturers Panel -->
+      <div id="manufacturersPanel" class="manufacturers-panel" style="display:none;">
+        <div class="mfr-header">
+          <h3>My Preferred Manufacturers</h3>
+          <p>Add your go-to vendors. Product suggestions will prioritize these brands and link to their sites.</p>
+        </div>
+        <div id="mfrList" class="mfr-list"></div>
+        <div class="mfr-add-form">
+          <input type="text" id="mfrName" class="studio-input" placeholder="Manufacturer name (e.g., Restoration Hardware)">
+          <input type="text" id="mfrUrl" class="studio-input" placeholder="Website URL (e.g., https://rh.com)" style="margin-top:8px;">
+          <input type="text" id="mfrCategory" class="studio-input" placeholder="Category (e.g., Furniture, Lighting, Tile) — optional" style="margin-top:8px;">
+          <button class="btn-add-mfr" onclick="addManufacturer()">+ Add Manufacturer</button>
+        </div>
+      </div>
+
+      <!-- Room Upload (shown initially) -->
+      <div id="studioUploadArea" style="max-width:720px; margin:0 auto;">
+        <div id="studioRoomDrop" class="studio-upload-area">
+          <div class="studio-upload-icon">&#128247;</div>
+          <h3 class="studio-upload-label">Upload Your Client's Room</h3>
+          <p class="studio-upload-hint">Drag &amp; drop a room photo, or click to browse</p>
+          <input type="file" id="studioRoomInput" accept="image/*" hidden>
+        </div>
+        <div style="margin-top:20px;">
+          <label class="studio-field-label" style="margin-bottom:8px; display:block;">Room Dimensions (optional — helps with scale accuracy)</label>
+          <div class="room-dims">
+            <div class="dim-field">
+              <label>Length</label>
+              <input type="text" id="room-length" placeholder='e.g., 15 ft'>
+            </div>
+            <div class="dim-field">
+              <label>Width</label>
+              <input type="text" id="room-width" placeholder='e.g., 12 ft'>
+            </div>
+            <div class="dim-field">
+              <label>Ceiling Height</label>
+              <input type="text" id="room-ceiling" placeholder='e.g., 9 ft'>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main workspace (hidden until room uploaded) -->
+      <div id="studioWorkspace" style="display:none; max-width:800px; margin:0 auto;">
+
+        <!-- Current Room State -->
+        <div class="current-room">
+          <img id="currentRoomImg" src="" alt="Current room state">
+          <div class="current-room-label">Current State</div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin:-8px 0 12px;">
+          <button onclick="showCompareAll()" style="background:none; border:1px solid #ddd; border-radius:8px; padding:6px 14px; font-size:13px; font-weight:600; color:#666; cursor:pointer; font-family:inherit; transition:all 0.2s;" onmouseover="this.style.borderColor='#a07060';this.style.color='#a07060'" onmouseout="this.style.borderColor='#ddd';this.style.color='#666'">🔄 Compare All</button>
+          <button onclick="downloadCurrentDesign()" style="background:none; border:1px solid #ddd; border-radius:8px; padding:6px 14px; font-size:13px; font-weight:600; color:#666; cursor:pointer; font-family:inherit; transition:all 0.2s;" onmouseover="this.style.borderColor='#a07060';this.style.color='#a07060'" onmouseout="this.style.borderColor='#ddd';this.style.color='#666'">⬇ Download Image</button>
+        </div>
+
+        <!-- Design Timeline -->
+        <div id="designTimeline" class="design-timeline"></div>
+
+        <!-- Change Type Selector -->
+        <h3 class="change-type-heading">What would you like to change?</h3>
+        <div class="change-type-buttons">
+          <button class="change-type-btn" data-type="item" onclick="selectChangeType('item')">&#129681; Place an Item</button>
+          <button class="change-type-btn" data-type="wall" onclick="selectChangeType('wall')">&#127912; Wall Color</button>
+          <button class="change-type-btn" data-type="floor" onclick="selectChangeType('floor')">&#127968; Flooring</button>
+          <button class="change-type-btn" data-type="custom" onclick="selectChangeType('custom')">&#9999;&#65039; Custom Change</button>
+          <button class="change-type-btn" data-type="redesign" onclick="selectChangeType('redesign')">&#10024; Complete Redesign</button>
+        </div>
+
+        <!-- Item Panel -->
+        <div id="panelItem" class="change-panel">
+          <label class="studio-field-label" style="margin-top:0;">Describe the item</label>
+          <input type="text" id="studio-item-desc" class="studio-input" placeholder="e.g., Navy blue velvet Restoration Hardware Cloud sofa">
+
+          <label class="studio-field-label">Or upload a photo of it</label>
+          <div id="studioItemUpload" class="studio-item-upload">
+            <div class="studio-item-upload-icon">&#128206;</div>
+            <div class="studio-item-upload-label">Click or drop item photo</div>
+            <input type="file" id="studioItemInput" accept="image/*" hidden>
+          </div>
+          <img id="studioItemImg" class="studio-item-preview" style="display:none; margin-top:10px;" alt="Item">
+
+          <label class="studio-field-label">Where should it go?</label>
+          <input type="text" id="studio-placement" class="studio-input" placeholder="Against the far wall, centered / In the corner by the window / Replace the current coffee table">
+          <button class="suggest-placement-btn" onclick="suggestPlacement()" id="suggestPlacementBtn">
+            <span class="suggest-icon">&#10024;</span>
+            <span class="suggest-spinner"></span>
+            Suggest Best Placement
+          </button>
+          <div id="placementSuggestions" class="placement-suggestions">
+            <div class="placement-suggestions-heading">AI-Suggested Placements</div>
+            <div id="suggestionCards"></div>
+          </div>
+
+          <label class="studio-field-label">Dimensions <span style="font-weight:400; color:var(--text-tertiary);">(optional)</span></label>
+          <div class="studio-dimensions">
+            <div class="dim-field">
+              <label>Width</label>
+              <input type="text" id="studio-width" class="studio-input" placeholder='e.g., 84"'>
+            </div>
+            <div class="dim-field">
+              <label>Height</label>
+              <input type="text" id="studio-height" class="studio-input" placeholder='e.g., 36"'>
+            </div>
+            <div class="dim-field">
+              <label>Depth</label>
+              <input type="text" id="studio-depth" class="studio-input" placeholder='e.g., 40"'>
+            </div>
+          </div>
+          <label class="studio-check-label">
+            <input type="checkbox" id="studio-check-scale"> Check if scale fits this space
+          </label>
+
+          <div style="display:flex; align-items:center; gap:10px; margin-top:14px;">
+            <label class="studio-field-label" style="margin:0; white-space:nowrap;">How many?</label>
+            <input type="number" id="studio-item-qty" class="studio-input" value="1" min="1" max="10" style="width:64px; text-align:center; padding:8px 6px;">
+            <span style="font-size:12px; color:var(--text-tertiary); line-height:1.3;">(for matching sets &mdash; bar stools, shelves, etc.)</span>
+          </div>
+        </div>
+
+        <!-- Wall Color Panel -->
+        <div id="panelWall" class="change-panel">
+          <label class="studio-field-label" style="margin-top:0;">What color?</label>
+          <input type="text" id="studio-wall-color" class="studio-input" placeholder="Benjamin Moore Simply White / warm sage green / navy">
+
+          <div class="color-swatches">
+            <div class="color-swatch" style="background:#FFFFFF;" onclick="pickColor('#FFFFFF','White')" title="White"><span class="color-swatch-label">White</span></div>
+            <div class="color-swatch" style="background:#F5F0E8;" onclick="pickColor('#F5F0E8','Cream')" title="Cream"><span class="color-swatch-label">Cream</span></div>
+            <div class="color-swatch" style="background:#D3D3D3;" onclick="pickColor('#D3D3D3','Light Gray')" title="Light Gray"><span class="color-swatch-label">Light Gray</span></div>
+            <div class="color-swatch" style="background:#9CAF88;" onclick="pickColor('#9CAF88','Sage Green')" title="Sage"><span class="color-swatch-label">Sage</span></div>
+            <div class="color-swatch" style="background:#2C3E6B;" onclick="pickColor('#2C3E6B','Navy')" title="Navy"><span class="color-swatch-label">Navy</span></div>
+            <div class="color-swatch" style="background:#36454F;" onclick="pickColor('#36454F','Charcoal')" title="Charcoal"><span class="color-swatch-label">Charcoal</span></div>
+            <div class="color-swatch" style="background:#F4C2C2;" onclick="pickColor('#F4C2C2','Blush Pink')" title="Blush"><span class="color-swatch-label">Blush</span></div>
+            <div class="color-swatch" style="background:#C2724F;" onclick="pickColor('#C2724F','Warm Terracotta')" title="Terracotta"><span class="color-swatch-label">Terracotta</span></div>
+          </div>
+
+          <label class="studio-field-label">Which walls?</label>
+          <input type="text" id="studio-wall-area" class="studio-input" placeholder="All walls / Just the accent wall behind the TV / Kitchen only">
+        </div>
+
+        <!-- Flooring Panel -->
+        <div id="panelFloor" class="change-panel">
+          <label class="studio-field-label" style="margin-top:0;">Choose a flooring type</label>
+          <div class="flooring-options" id="flooringOptions">
+            <div class="flooring-opt" data-floor="Light Oak Hardwood">&#129717; Light Oak</div>
+            <div class="flooring-opt" data-floor="Dark Walnut Hardwood">&#129717; Dark Walnut</div>
+            <div class="flooring-opt" data-floor="Natural Hardwood">&#129717; Natural</div>
+            <div class="flooring-opt" data-floor="White Carrara Marble">&#127963;&#65039; White Marble</div>
+            <div class="flooring-opt" data-floor="Dark Emperador Marble">&#127963;&#65039; Dark Marble</div>
+            <div class="flooring-opt" data-floor="White Subway Tile">&#128306; Subway Tile</div>
+            <div class="flooring-opt" data-floor="Hexagonal Tile">&#11043; Hex Tile</div>
+            <div class="flooring-opt" data-floor="Terracotta Tile">&#129003; Terracotta</div>
+            <div class="flooring-opt" data-floor="Plush Cream Carpet">&#129526; Cream Carpet</div>
+            <div class="flooring-opt" data-floor="Gray Berber Carpet">&#129526; Gray Carpet</div>
+            <div class="flooring-opt" data-floor="Polished Concrete">&#129704; Concrete</div>
+            <div class="flooring-opt" data-floor="Travertine Stone">&#129704; Travertine</div>
+          </div>
+          <div class="floor-selection-confirm" id="floorSelectionConfirm"></div>
+
+          <label class="studio-field-label">Which area?</label>
+          <input type="text" id="studio-floor-area" class="studio-input" placeholder="Entire room / Kitchen only / Bathroom floor">
+        </div>
+
+        <!-- Custom Change Panel -->
+        <!-- Complete Redesign Panel -->
+        <div id="panelRedesign" class="change-panel">
+          <label class="studio-field-label" style="margin-top:0;">Choose a Design Style</label>
+          <div class="style-options">
+            <div class="style-opt" onclick="pickStyle(this, 'Modern / Contemporary')"><div class="style-opt-icon">&#127961;</div><div class="style-opt-name">Modern</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Traditional / Classic')"><div class="style-opt-icon">&#127963;</div><div class="style-opt-name">Traditional</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Mid-Century Modern')"><div class="style-opt-icon">&#129681;</div><div class="style-opt-name">Mid-Century</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Minimalist')"><div class="style-opt-icon">&#11036;</div><div class="style-opt-name">Minimalist</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Industrial')"><div class="style-opt-icon">&#127981;</div><div class="style-opt-name">Industrial</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Farmhouse / Rustic')"><div class="style-opt-icon">&#127969;</div><div class="style-opt-name">Farmhouse</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Coastal / Beach')"><div class="style-opt-icon">&#127958;</div><div class="style-opt-name">Coastal</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Scandinavian')"><div class="style-opt-icon">&#10052;</div><div class="style-opt-name">Scandinavian</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Bohemian / Eclectic')"><div class="style-opt-icon">&#127807;</div><div class="style-opt-name">Bohemian</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Art Deco / Glam')"><div class="style-opt-icon">&#10024;</div><div class="style-opt-name">Art Deco</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Transitional')"><div class="style-opt-icon">&#128256;</div><div class="style-opt-name">Transitional</div></div>
+            <div class="style-opt" onclick="pickStyle(this, 'Mediterranean')"><div class="style-opt-icon">&#127774;</div><div class="style-opt-name">Mediterranean</div></div>
+          </div>
+          <label class="studio-field-label" style="margin-top:16px;">Or type your own style</label>
+          <input type="text" id="studio-redesign-style" class="studio-input" placeholder="e.g., Japanese zen, Hollywood regency, French country, dark moody library">
+          <label class="studio-field-label" style="margin-top:16px;">What to keep (optional)</label>
+          <input type="text" id="studio-redesign-keep" class="studio-input" placeholder="e.g., Keep the layout and windows / Keep the fireplace / Change everything">
+        </div>
+
+        <div id="panelCustom" class="change-panel">
+          <label class="studio-field-label" style="margin-top:0;">Describe what you want to change</label>
+          <textarea id="studio-custom-change" class="studio-textarea" rows="3" placeholder="Replace all cabinet hardware with brushed gold handles / Add recessed lighting / Change countertops to white quartz / Remove the bookshelf"></textarea>
+        </div>
+
+<!-- Designer Notes (visible when a panel is active) -->
+        <div id="designerNotesArea" class="designer-notes-area" style="display:none;">
+          <label class="studio-field-label" style="margin-top:0;">Additional direction <span style="font-weight:400; color:var(--text-tertiary);">(optional)</span></label>
+          <textarea id="studio-notes" class="studio-textarea" rows="2" placeholder="Keep it modern but warm / Match the client's existing style / Make the lighting feel natural"></textarea>
+
+          <button class="btn-apply" onclick="applyChange()">&#10024; Apply This Change</button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="studioLoading" class="studio-loading">
+          <div class="loading-spinner"></div>
+          <div id="studioLoadingMsg" class="loading-msg">Analyzing the space...</div>
+          <div class="loading-hint">This usually takes 15–30 seconds</div>
+        </div>
+
+        <!-- Change Review (before/after + keep/discard) -->
+        <div id="studioReview" class="change-review">
+          <h3 class="review-heading">Review This Change</h3>
+          <div class="review-comparison">
+            <div class="review-side">
+              <div class="review-side-label before-label">Before</div>
+              <img id="reviewBefore" src="" alt="Before">
+            </div>
+            <div class="review-side">
+              <div class="review-side-label after-label">After</div>
+              <img id="reviewAfter" src="" alt="After">
+            </div>
+          </div>
+
+          <!-- Scale check card -->
+          <div id="scaleCheckCard" class="scale-check-card" style="display:none;">
+            <span id="scaleCheckIcon"></span>
+            <span id="scaleCheckText"></span>
+          </div>
+
+          <div class="review-actions">
+            <button class="btn-keep" onclick="keepChange()">&#9989; Keep This Change</button>
+            <button class="btn-retry" onclick="retryChange()">&#128260; Try Again</button>
+            <button class="btn-discard" onclick="discardChange()">&#10060; Discard</button>
+          </div>
+
+          <!-- Product suggestions (visible after any change, not just items) -->
+          <div id="productSection" style="margin-top: 24px; text-align: center;">
+            <div class="shop-for-bar">
+              <label class="shop-for-label">🛍️ Shop For:</label>
+              <input type="text" id="shopForInput" class="shop-for-input" placeholder='e.g. "couch", "table", "entire look"' />
+              <button class="btn-products" onclick="findRealProducts()">Find Products</button>
+            </div>
+            <div id="productResults"></div>
+          </div>
+          <div id="ratingSection" style="margin-top: 24px; text-align: center;">
+            <button class="btn-rating" onclick="rateDesign()">⭐ Rate This Design</button>
+            <div id="ratingResults"></div>
+          </div>
+        </div>
+
+        <!-- Start Over -->
+        <div style="text-align:center; margin-top:32px;">
+          <button class="btn-start-over" onclick="startOver()">&#128465;&#65039; Start Over with New Room</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARE ALL OVERLAY ===== -->
+  <div id="compareOverlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(255,255,255,0.97); z-index:9998; overflow-y:auto; padding:24px;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; position:sticky; top:0; background:rgba(255,255,255,0.95); padding:12px 0; border-bottom:1px solid #eee; z-index:1;">
+        <h2 style="margin:0; font-size:1.4rem; font-weight:800; color:#1a1a2e;">📋 Design Journey — Before &amp; After</h2>
+        <button onclick="closeCompareAll()" style="background:var(--accent); color:white; border:none; border-radius:8px; padding:8px 20px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit;">✕ Close</button>
+      </div>
+      <div id="compareContent"></div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-logo">&#10022; RoomEdit Pro</span>
+        <span class="footer-copy">&copy; 2026. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/* ============================================
+   RoomEdit Pro — Design Studio Logic
+   ============================================ */
+
+// --- OpenRouter API Config ---
+const OPENROUTER_API_KEY = 'OPENROUTER_API_KEY_HERE';
+const OPENROUTER_MODEL = 'google/gemini-3.1-flash-image-preview';
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+
+// --- Utility: callOpenRouter ---
+async function callOpenRouter(messages, temperature) {
+  if (temperature === undefined) temperature = 0.7;
+  const response = await fetch(OPENROUTER_URL, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://roomvision.ai',
+      'X-Title': 'RoomEdit Pro'
+    },
+    body: JSON.stringify({
+      model: OPENROUTER_MODEL,
+      messages: messages,
+      temperature: temperature
+    })
+  });
+
+  if (!response.ok) {
+    var errText = await response.text();
+    throw new Error('API error ' + response.status + ': ' + errText);
+  }
+
+  var data = await response.json();
+  if (data.error) {
+    throw new Error(data.error.message || 'Unknown API error');
+  }
+  return data.choices[0].message.content;
+}
+
+// --- Utility: File to base64 ---
+function fileToBase64(file) {
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function() { resolve(reader.result); };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// --- Utility: Resize image ---
+function resizeImage(dataUrl, maxDim) {
+  if (!maxDim) maxDim = 2048;
+  return new Promise(function(resolve) {
+    var img = new Image();
+    img.onload = function() {
+      var w = img.width, h = img.height;
+      if (w <= maxDim && h <= maxDim) { resolve(dataUrl); return; }
+      var scale = maxDim / Math.max(w, h);
+      w = Math.round(w * scale);
+      h = Math.round(h * scale);
+      var canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', 0.92));
+    };
+    img.src = dataUrl;
+  });
+}
+
+// --- Utility: processImage (resize file to base64) ---
+async function processImage(file) {
+  var dataUrl = await fileToBase64(file);
+  return await resizeImage(dataUrl);
+}
+
+// --- Utility: Toast ---
+function showToast(message) {
+  var toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = '<span class="toast-icon">&#10003;</span> ' + message;
+  toast.classList.remove('show');
+  void toast.offsetWidth;
+  toast.classList.add('show');
+
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
+}
+
+// --- Utility: Scroll reveal ---
+function initScrollReveal() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+}
+
+// ==================== DESIGN STUDIO STATE ====================
+var designHistory = []; // [{image: base64, description: string, timestamp: Date}]
+var studioRoomBase64 = null;
+var studioItemBase64 = null;
+var studioRoomAspectRatio = '4:3'; // detected from uploaded image
+var selectedFloor = '';
+var selectedStyle = '';
+var roomDimensions = '';
+var currentChangeType = '';
+var lastChangeDescription = '';
+var lastGeneratedImage = null;
+var lastItemDescription = '';
+var isApplying = false;
+
+// --- Utility: Detect closest supported aspect ratio ---
+function detectAspectRatio(width, height) {
+  var supported = [
+    { ratio: '1:1', value: 1 },
+    { ratio: '2:3', value: 2/3 },
+    { ratio: '3:2', value: 3/2 },
+    { ratio: '3:4', value: 3/4 },
+    { ratio: '4:3', value: 4/3 },
+    { ratio: '4:5', value: 4/5 },
+    { ratio: '5:4', value: 5/4 },
+    { ratio: '9:16', value: 9/16 },
+    { ratio: '16:9', value: 16/9 },
+    { ratio: '21:9', value: 21/9 }
+  ];
+  var actual = width / height;
+  var closest = supported[0];
+  var closestDiff = Math.abs(actual - supported[0].value);
+  for (var i = 1; i < supported.length; i++) {
+    var diff = Math.abs(actual - supported[i].value);
+    if (diff < closestDiff) {
+      closest = supported[i];
+      closestDiff = diff;
+    }
+  }
+  return closest.ratio;
+}
+
+// ==================== INIT ====================
+function initStudio() {
+  var roomDrop = document.getElementById('studioRoomDrop');
+  var roomInput = document.getElementById('studioRoomInput');
+
+  roomDrop.addEventListener('click', function(e) {
+    if (e.target === roomInput) return;
+    roomInput.click();
+  });
+  roomDrop.addEventListener('dragover', function(e) { e.preventDefault(); roomDrop.classList.add('drag-over'); });
+  roomDrop.addEventListener('dragleave', function() { roomDrop.classList.remove('drag-over'); });
+  roomDrop.addEventListener('drop', function(e) {
+    e.preventDefault();
+    roomDrop.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) handleStudioRoomUpload(e.dataTransfer.files[0]);
+  });
+  roomInput.addEventListener('change', function(e) {
+    if (e.target.files[0]) handleStudioRoomUpload(e.target.files[0]);
+  });
+
+  // Item upload handlers
+  var itemUpload = document.getElementById('studioItemUpload');
+  var itemInput = document.getElementById('studioItemInput');
+
+  itemUpload.addEventListener('click', function(e) {
+    if (e.target === itemInput) return;
+    itemInput.click();
+  });
+  itemUpload.addEventListener('dragover', function(e) { e.preventDefault(); itemUpload.classList.add('drag-over'); });
+  itemUpload.addEventListener('dragleave', function() { itemUpload.classList.remove('drag-over'); });
+  itemUpload.addEventListener('drop', function(e) {
+    e.preventDefault();
+    itemUpload.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) handleStudioItemUpload(e.dataTransfer.files[0]);
+  });
+  itemInput.addEventListener('change', function(e) {
+    if (e.target.files[0]) handleStudioItemUpload(e.target.files[0]);
+  });
+}
+
+async function handleStudioRoomUpload(file) {
+  if (!file.type.startsWith('image/')) {
+    showToast('Please upload an image file');
+    return;
+  }
+  try {
+    var base64 = await processImage(file);
+    studioRoomBase64 = base64;
+
+    // Detect aspect ratio from the uploaded image
+    var tmpImg = new Image();
+    await new Promise(function(resolve) {
+      tmpImg.onload = resolve;
+      tmpImg.src = base64;
+    });
+    studioRoomAspectRatio = detectAspectRatio(tmpImg.naturalWidth, tmpImg.naturalHeight);
+    console.log('Detected room aspect ratio:', studioRoomAspectRatio, '(' + tmpImg.naturalWidth + 'x' + tmpImg.naturalHeight + ')');
+
+    // Capture room dimensions if provided
+    var rl = document.getElementById('room-length').value.trim();
+    var rw = document.getElementById('room-width').value.trim();
+    var rc = document.getElementById('room-ceiling').value.trim();
+    if (rl || rw || rc) {
+      roomDimensions = 'Room dimensions:';
+      if (rl) roomDimensions += ' Length: ' + rl;
+      if (rw) roomDimensions += ', Width: ' + rw;
+      if (rc) roomDimensions += ', Ceiling height: ' + rc;
+    } else {
+      roomDimensions = '';
+    }
+
+    // Initialize design history with original
+    designHistory = [{
+      image: base64,
+      description: 'Original Room',
+      timestamp: new Date()
+    }];
+
+    // Show workspace, hide upload, collapse header
+    document.getElementById('studioUploadArea').style.display = 'none';
+    document.getElementById('studioHeader').style.display = 'none';
+    document.getElementById('studioWorkspace').style.display = 'block';
+
+    // Set current room image
+    document.getElementById('currentRoomImg').src = base64;
+
+    // Update timeline
+    updateTimeline();
+    showToast('Room photo loaded — make your first change below');
+  } catch (err) {
+    console.error('Room upload error:', err);
+    showToast('Error loading room photo. Please try again.');
+  }
+}
+
+async function handleStudioItemUpload(file) {
+  if (!file.type.startsWith('image/')) {
+    showToast('Please upload an image file');
+    return;
+  }
+  try {
+    studioItemBase64 = await processImage(file);
+    var preview = document.getElementById('studioItemImg');
+    preview.src = studioItemBase64;
+    preview.style.display = 'block';
+    document.getElementById('studioItemUpload').classList.add('has-image');
+  } catch (err) {
+    console.error('Item upload error:', err);
+    showToast('Error loading item photo. Please try again.');
+  }
+}
+
+// ==================== CHANGE TYPE SELECTION ====================
+function selectChangeType(type) {
+  currentChangeType = type;
+  // Update button styles
+  document.querySelectorAll('.change-type-btn').forEach(function(b) { b.classList.remove('active'); });
+  var activeBtn = document.querySelector('[data-type="' + type + '"]');
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // Show/hide panels
+  document.querySelectorAll('.change-panel').forEach(function(p) { p.classList.remove('active'); });
+  var panelMap = { item: 'panelItem', wall: 'panelWall', floor: 'panelFloor', custom: 'panelCustom', redesign: 'panelRedesign' };
+  var panel = document.getElementById(panelMap[type]);
+  if (panel) panel.classList.add('active');
+
+  // Show designer notes + apply button
+  document.getElementById('designerNotesArea').style.display = 'block';
+
+  // Hide any previous review
+  document.getElementById('studioReview').classList.remove('active');
+}
+
+function pickColor(hex, name) {
+  document.getElementById('studio-wall-color').value = name;
+  document.querySelectorAll('.color-swatch').forEach(function(s) { s.classList.remove('selected'); });
+  if (event && event.currentTarget) event.currentTarget.classList.add('selected');
+}
+
+function pickFloor(el, name) {
+  selectedFloor = name;
+  document.querySelectorAll('.flooring-opt').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+  var confirm = document.getElementById('floorSelectionConfirm');
+  if (confirm) confirm.textContent = '✓ Selected: ' + name;
+}
+
+// Event delegation for flooring chips (more reliable than inline onclick)
+document.addEventListener('DOMContentLoaded', function() {
+  var floorContainer = document.getElementById('flooringOptions');
+  if (floorContainer) {
+    floorContainer.addEventListener('click', function(e) {
+      var chip = e.target.closest('.flooring-opt');
+      if (chip && chip.dataset.floor) {
+        pickFloor(chip, chip.dataset.floor);
+      }
+    });
+  }
+});
+
+// ==================== MANUFACTURERS ====================
+function getManufacturers() {
+  try {
+    return JSON.parse(localStorage.getItem('roomvision_manufacturers') || '[]');
+  } catch(e) { return []; }
+}
+
+function saveManufacturers(list) {
+  localStorage.setItem('roomvision_manufacturers', JSON.stringify(list));
+}
+
+function toggleManufacturers() {
+  var panel = document.getElementById('manufacturersPanel');
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+    renderManufacturers();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+function renderManufacturers() {
+  var list = getManufacturers();
+  var html = '';
+  if (list.length === 0) {
+    html = '<p style="color:#999; font-size:13px; text-align:center; padding:16px;">No manufacturers added yet. Add your preferred vendors below.</p>';
+  } else {
+    list.forEach(function(mfr, i) {
+      html += '<div class="mfr-item">';
+      html += '<div class="mfr-item-info">';
+      html += '<div class="mfr-item-name">' + mfr.name + '</div>';
+      if (mfr.url) html += '<a href="' + mfr.url + '" target="_blank" class="mfr-item-url">' + mfr.url + '</a>';
+      if (mfr.category) html += '<div class="mfr-item-cat">' + mfr.category + '</div>';
+      html += '</div>';
+      html += '<button class="mfr-item-remove" onclick="removeManufacturer(' + i + ')" title="Remove">✕</button>';
+      html += '</div>';
+    });
+  }
+  document.getElementById('mfrList').innerHTML = html;
+}
+
+function addManufacturer() {
+  var name = document.getElementById('mfrName').value.trim();
+  var url = document.getElementById('mfrUrl').value.trim();
+  var category = document.getElementById('mfrCategory').value.trim();
+  if (!name) { showToast('Please enter a manufacturer name'); return; }
+  // Auto-add https if missing
+  if (url && !url.startsWith('http')) url = 'https://' + url;
+  var list = getManufacturers();
+  list.push({ name: name, url: url, category: category });
+  saveManufacturers(list);
+  document.getElementById('mfrName').value = '';
+  document.getElementById('mfrUrl').value = '';
+  document.getElementById('mfrCategory').value = '';
+  renderManufacturers();
+  showToast(name + ' added!');
+}
+
+function removeManufacturer(index) {
+  var list = getManufacturers();
+  var name = list[index].name;
+  list.splice(index, 1);
+  saveManufacturers(list);
+  renderManufacturers();
+  showToast(name + ' removed');
+}
+
+function getManufacturerUrl(brandName) {
+  var list = getManufacturers();
+  var brand = brandName.toLowerCase();
+  for (var i = 0; i < list.length; i++) {
+    if (brand.indexOf(list[i].name.toLowerCase()) !== -1 || list[i].name.toLowerCase().indexOf(brand) !== -1) {
+      return list[i].url || null;
+    }
+  }
+  return null;
+}
+
+// ==================== SERPAPI PRODUCT RENDERING ====================
+var _serpCardCounter = 0;
+
+function escHtml(str) {
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+function escAttr(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderStars(rating) {
+  if (!rating) return '';
+  var full = Math.floor(rating);
+  var half = rating - full >= 0.3;
+  var s = '';
+  for (var i = 0; i < full; i++) s += '★';
+  if (half) s += '½';
+  return s;
+}
+
+function renderSerpSkeletons(count) {
+  var html = '';
+  for (var i = 0; i < count; i++) {
+    html += '<div class="serp-skeleton-card"><div class="serp-skeleton-img"></div><div class="serp-skeleton-body"><div class="serp-skeleton-line"></div><div class="serp-skeleton-line"></div><div class="serp-skeleton-line"></div></div></div>';
+  }
+  return html;
+}
+
+function renderSerpCards(results, groupId) {
+  return results.map(function(p) {
+    var idx = _serpCardCounter++;
+    var stars = renderStars(p.rating);
+    var ratingHtml = p.rating
+      ? '<div class="serp-card-rating"><span>' + stars + '</span> <span class="serp-count">(' + (p.reviews || 0) + ')</span></div>'
+      : '';
+    var googleLink = p.product_link || p.link || '#';
+    var hasToken = !!p.immersive_product_page_token;
+
+    return '<div class="serp-card" id="serp-card-' + idx + '">' +
+      '<img class="serp-card-img" src="' + escAttr(p.thumbnail || '') + '" alt="" onerror="this.style.display=\'none\'" />' +
+      '<div class="serp-card-body">' +
+        '<div class="serp-card-title">' + escHtml(p.title || 'Untitled') + '</div>' +
+        '<div class="serp-card-meta">' +
+          '<span class="serp-card-price">' + escHtml(p.extracted_price ? '$' + p.extracted_price : p.price || '') + '</span>' +
+          '<span class="serp-card-source">' + escHtml(p.source || '') + '</span>' +
+        '</div>' +
+        ratingHtml +
+      '</div>' +
+      '<div class="serp-card-actions" id="serp-actions-' + idx + '">' +
+        (hasToken
+          ? '<a class="serp-btn serp-btn-loading" id="serp-direct-' + idx + '"><span class="serp-spinner"></span> Finding store link...</a>'
+          : '') +
+        '<a class="serp-btn serp-btn-secondary" href="' + escAttr(googleLink) + '" target="_blank" rel="noopener">View on Google Shopping</a>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+async function fetchDirectLink(pageToken, cardIdx) {
+  var btn = document.getElementById('serp-direct-' + cardIdx);
+  if (!btn) return;
+  try {
+    var resp = await fetch('/api/product-details?page_token=' + encodeURIComponent(pageToken));
+    var data = await resp.json();
+    var stores = (data.product_results && data.product_results.stores) || (data.sellers_results && data.sellers_results.online_sellers) || [];
+    var firstStore = stores[0];
+    if (firstStore && firstStore.link) {
+      var storeName = firstStore.name || 'Store';
+      var storePrice = firstStore.price || '';
+      var label = storePrice ? 'Shop at ' + storeName + ' — ' + storePrice : 'Shop at ' + storeName;
+      btn.className = 'serp-btn serp-btn-primary';
+      btn.href = firstStore.link;
+      btn.target = '_blank';
+      btn.rel = 'noopener';
+      btn.innerHTML = escHtml(label);
+    } else {
+      btn.remove();
+    }
+  } catch (err) {
+    if (btn) btn.remove();
+  }
+}
+
+async function searchSerpAPI(query) {
+  var resp = await fetch('/api/shopping?q=' + encodeURIComponent(query));
+  var data = await resp.json();
+  if (data.error) throw new Error(data.error);
+  return (data.shopping_results || []).slice(0, 6);
+}
+
+function getManufacturerPromptText() {
+  var list = getManufacturers();
+  if (list.length === 0) return '';
+  var text = '\n\nPREFERRED MANUFACTURERS — The designer works with these vendors. PRIORITIZE products from these brands when possible:\n';
+  list.forEach(function(mfr) {
+    text += '- ' + mfr.name;
+    if (mfr.category) text += ' (' + mfr.category + ')';
+    if (mfr.url) text += ' — website: ' + mfr.url;
+    text += '\n';
+  });
+  text += 'When suggesting products from these manufacturers, use their actual website URL as the shopping link instead of Google Shopping. For other brands, use Google Shopping as usual.\n';
+  return text;
+}
+
+function pickStyle(el, name) {
+  selectedStyle = name;
+  document.getElementById('studio-redesign-style').value = name;
+  document.querySelectorAll('.style-opt').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+// ==================== SUGGEST PLACEMENT ====================
+async function suggestPlacement() {
+  // Validate: need room photo and item (description or photo)
+  var itemDesc = document.getElementById('studio-item-desc').value.trim();
+  if (!studioRoomBase64) {
+    showToast('Please upload a room photo first');
+    return;
+  }
+  if (!itemDesc && !studioItemBase64) {
+    showToast('Please describe the item or upload a photo of it first');
+    return;
+  }
+  if (designHistory.length === 0) {
+    showToast('Please upload a room photo first');
+    return;
+  }
+
+  var btn = document.getElementById('suggestPlacementBtn');
+  var suggestionsContainer = document.getElementById('placementSuggestions');
+  var cardsContainer = document.getElementById('suggestionCards');
+
+  // Loading state
+  btn.classList.add('loading');
+  btn.disabled = true;
+  suggestionsContainer.classList.remove('active');
+  cardsContainer.innerHTML = '';
+
+  try {
+    var currentImage = designHistory[designHistory.length - 1].image;
+    var roomContent = currentImage.split(',')[1];
+    var roomMime = currentImage.split(';')[0].split(':')[1];
+
+    var contentParts = [
+      { type: 'image_url', image_url: { url: 'data:' + roomMime + ';base64,' + roomContent } }
+    ];
+
+    // Add item photo if available
+    if (studioItemBase64) {
+      var itemContent = studioItemBase64.split(',')[1];
+      var itemMime = studioItemBase64.split(';')[0].split(':')[1];
+      contentParts.push({ type: 'image_url', image_url: { url: 'data:' + itemMime + ';base64,' + itemContent } });
+    }
+
+    var suggestQty = parseInt(document.getElementById('studio-item-qty').value) || 1;
+    if (suggestQty < 1) suggestQty = 1;
+
+    var prompt = 'You are a professional interior designer. ';
+    prompt += 'The first image shows the current room. ';
+    if (studioItemBase64) {
+      prompt += 'The second image shows the item the designer wants to place in this room. ';
+    }
+    if (itemDesc) {
+      prompt += 'The item is described as: "' + itemDesc + '". ';
+    }
+    if (suggestQty > 1) {
+      prompt += 'The designer wants to place ' + suggestQty + ' of this SAME item (a matching set). ';
+    }
+
+    prompt += '\n\nAnalyze the room layout, lighting, existing furniture arrangement, traffic flow, and visual balance. ';
+    if (suggestQty > 1) {
+      prompt += 'Then suggest exactly 3 optimal arrangements for placing ' + suggestQty + ' of this item together in the room. For each suggestion, describe where ALL ' + suggestQty + ' items should go and how they should be arranged relative to each other (spacing, alignment, grouping). ';
+    } else {
+      prompt += 'Then suggest exactly 3 optimal locations to place this item in the room. ';
+    }
+    prompt += 'For each suggestion, consider:\n';
+    prompt += '- How it complements existing furniture and creates visual balance\n';
+    prompt += '- Lighting conditions (natural light from windows, ambient light)\n';
+    prompt += '- Traffic flow and functionality\n';
+    prompt += '- Scale and proportion relative to the space\n';
+    prompt += '- Design principles (rule of thirds, focal points, symmetry)\n\n';
+    prompt += 'Return your answer as JSON only, no other text:\n';
+    prompt += '{\n';
+    prompt += '  "suggestions": [\n';
+    prompt += '    {\n';
+    prompt += '      "location": "Short location description, e.g. Corner by the window",\n';
+    prompt += '      "placement_instruction": "Detailed placement instruction for the AI renderer, e.g. Place the item in the far right corner of the room next to the window, angled slightly toward the center of the room",\n';
+    prompt += '      "reasoning": "Brief reasoning why this is a good spot, 1-2 sentences max"\n';
+    prompt += '    }\n';
+    prompt += '  ]\n';
+    prompt += '}';
+
+    contentParts.push({ type: 'text', text: prompt });
+
+    var resp = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://roomvision.ai',
+        'X-Title': 'RoomEdit Pro'
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-3.1-flash-image-preview',
+        messages: [{ role: 'user', content: contentParts }],
+        temperature: 0.5
+      })
+    });
+
+    var data = await resp.json();
+    if (data.error) throw new Error(data.error.message || 'API error');
+
+    var responseText = data.choices[0].message.content;
+
+    // Parse JSON from response
+    var parsed = null;
+    try {
+      var jsonMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)```/);
+      parsed = JSON.parse(jsonMatch ? jsonMatch[1] : responseText);
+    } catch(e) {
+      try {
+        var objMatch = responseText.match(/\{[\s\S]*\}/);
+        parsed = objMatch ? JSON.parse(objMatch[0]) : null;
+      } catch(e2) {
+        parsed = null;
+      }
+    }
+
+    if (!parsed || !parsed.suggestions || !parsed.suggestions.length) {
+      throw new Error('Could not parse placement suggestions');
+    }
+
+    // Render suggestion cards
+    cardsContainer.innerHTML = '';
+    parsed.suggestions.forEach(function(suggestion, index) {
+      var card = document.createElement('div');
+      card.className = 'suggestion-card';
+      card.innerHTML = '<div class="suggestion-card-location">' + (index + 1) + '. ' + escapeHtml(suggestion.location) + '</div>' +
+        '<div class="suggestion-card-reason">' + escapeHtml(suggestion.reasoning) + '</div>';
+      card.addEventListener('click', function() {
+        // Deselect all cards
+        cardsContainer.querySelectorAll('.suggestion-card').forEach(function(c) { c.classList.remove('selected'); });
+        // Select this one
+        card.classList.add('selected');
+        // Fill the placement input with the detailed instruction
+        document.getElementById('studio-placement').value = suggestion.placement_instruction;
+        showToast('Placement set: ' + suggestion.location);
+      });
+      cardsContainer.appendChild(card);
+    });
+
+    suggestionsContainer.classList.add('active');
+
+  } catch(err) {
+    console.error('Suggest placement error:', err);
+    showToast('Could not get suggestions. Please try again.');
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+// Helper: escape HTML to prevent XSS in suggestion text
+function escapeHtml(text) {
+  var div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ==================== APPLY CHANGE ====================
+async function applyChange() {
+  if (isApplying) return;
+  if (!currentChangeType) {
+    showToast('Please select what you want to change');
+    return;
+  }
+
+  var currentImage = designHistory[designHistory.length - 1].image;
+  var designerNotes = document.getElementById('studio-notes').value.trim();
+
+  // Build change description
+  var changeDescription = '';
+  var scaleCheckRequested = false;
+  var dimensions = '';
+
+  if (currentChangeType === 'item') {
+    var desc = document.getElementById('studio-item-desc').value.trim();
+    var placement = document.getElementById('studio-placement').value.trim();
+    var w = document.getElementById('studio-width').value.trim();
+    var h = document.getElementById('studio-height').value.trim();
+    var d = document.getElementById('studio-depth').value.trim();
+    scaleCheckRequested = document.getElementById('studio-check-scale').checked;
+    var itemQty = parseInt(document.getElementById('studio-item-qty').value) || 1;
+    if (itemQty < 1) itemQty = 1;
+    if (itemQty > 10) itemQty = 10;
+
+    if (!desc && !studioItemBase64) {
+      showToast('Please describe the item or upload a photo of it');
+      return;
+    }
+
+    lastItemDescription = desc;
+    if (itemQty > 1) {
+      changeDescription = 'Place exactly ' + itemQty + ' of this item in the room: ' + (desc || 'See uploaded item photo') + '.';
+    } else {
+      changeDescription = 'Place this item in the room: ' + (desc || 'See uploaded item photo') + '.';
+    }
+    if (placement) changeDescription += ' Position: ' + placement + '.';
+    if (itemQty > 1) changeDescription += ' Arrange the ' + itemQty + ' items in a visually balanced, evenly spaced arrangement appropriate to their function (e.g., bar stools evenly along a counter, shelves symmetrically on a wall, dining chairs around a table).';
+    if (w || h || d) {
+      dimensions = (w ? 'Width: ' + w + ' ' : '') + (h ? 'Height: ' + h + ' ' : '') + (d ? 'Depth: ' + d : '');
+      dimensions = dimensions.trim();
+      changeDescription += ' Dimensions (each): ' + dimensions + '.';
+    }
+  } else if (currentChangeType === 'wall') {
+    var color = document.getElementById('studio-wall-color').value.trim();
+    var area = document.getElementById('studio-wall-area').value.trim() || 'all walls';
+    if (!color) { showToast('Please enter or pick a wall color'); return; }
+    changeDescription = 'Change the wall color to ' + color + ' on ' + area + '.';
+    changeDescription += ' Do NOT move, add, remove, or modify any furniture, decorations, lighting fixtures, rugs, or objects. ONLY change the wall color/wallpaper.';
+  } else if (currentChangeType === 'floor') {
+    var floorArea = document.getElementById('studio-floor-area').value.trim() || 'the entire room';
+    if (!selectedFloor) { showToast('Please select a flooring type'); return; }
+    changeDescription = 'Change the flooring to ' + selectedFloor + ' in ' + floorArea + '.';
+    changeDescription += ' Do NOT move, add, remove, or modify any furniture, decorations, lighting fixtures, or objects. ONLY change the flooring.';
+  } else if (currentChangeType === 'custom') {
+    var custom = document.getElementById('studio-custom-change').value.trim();
+    if (!custom) { showToast('Please describe what you want to change'); return; }
+    changeDescription = custom;
+  } else if (currentChangeType === 'redesign') {
+    var style = document.getElementById('studio-redesign-style').value.trim() || selectedStyle;
+    var keepItems = document.getElementById('studio-redesign-keep').value.trim();
+    if (!style) { showToast('Please choose or type a design style'); return; }
+    changeDescription = 'COMPLETELY REDESIGN this entire room in a ' + style + ' style. Replace all furniture, decor, wall treatments, and flooring to match a cohesive ' + style + ' aesthetic.';
+    if (keepItems) changeDescription += ' However, keep these elements: ' + keepItems + '.';
+    changeDescription += ' The redesign should be dramatic and clearly different from the original — new furniture, new color palette, new textures, new lighting, everything should reflect ' + style + ' design principles.';
+  }
+
+  // Save changeDescription to broader scope so image generation step can reference it
+  window._lastChangeDescription = changeDescription;
+
+  isApplying = true;
+
+  // Show loading
+  var loading = document.getElementById('studioLoading');
+  var loadingMsg = document.getElementById('studioLoadingMsg');
+  loading.classList.add('active');
+  document.getElementById('studioReview').classList.remove('active');
+
+  var loadingMessages = [
+    'Analyzing the space...', 'Understanding the room layout...',
+    'Planning the changes...', 'Rendering the new design...',
+    'Adding finishing touches...', 'Almost there...'
+  ];
+  var msgIndex = 0;
+  var msgInterval = setInterval(function() {
+    msgIndex = (msgIndex + 1) % loadingMessages.length;
+    loadingMsg.textContent = loadingMessages[msgIndex];
+  }, 3000);
+
+  try {
+    // Step 1: Text AI analysis
+    var analysisPrompt = 'You are a professional interior design visualization assistant.\n\n';
+    if (roomDimensions) analysisPrompt += roomDimensions + '. Use these dimensions to ensure all furniture and items are properly scaled and proportioned for the space.\n\n';
+
+    if (designHistory.length > 1) {
+      var prevChanges = designHistory.slice(1).map(function(h) { return h.description; }).join(', ');
+      analysisPrompt += 'This room has already been modified. Previous changes: ' + prevChanges + '.\n\n';
+    }
+
+    analysisPrompt += 'Now make this SINGLE additional change to the room:\n' + changeDescription + '\n';
+    if (designerNotes) analysisPrompt += '\nDESIGNER DIRECTION: ' + designerNotes + '\n';
+
+    if (studioItemBase64 && currentChangeType === 'item') {
+      analysisPrompt += '\nCRITICAL — EXACT ITEM MATCH: The second image is a photo of the EXACT item the designer wants placed in this room. You MUST describe this item with extreme precision — every detail of its design, shape, color, material, texture, pattern, legs/base style, hardware, proportions. The image generation step must reproduce THIS EXACT ITEM, not a similar-looking substitute. Describe it so precisely that only this specific item could match the description.\n';
+      if (itemQty > 1) {
+        analysisPrompt += '\nQUANTITY: The designer wants EXACTLY ' + itemQty + ' of this identical item placed in the room. Your change_instruction MUST specify placing ' + itemQty + ' matching copies of this item. Describe how they should be arranged — evenly spaced, symmetrically positioned, or grouped in a way that looks intentional and professionally designed. Every copy must be visually identical.\n';
+      }
+    }
+    if (!studioItemBase64 && currentChangeType === 'item' && itemQty > 1) {
+      analysisPrompt += '\nQUANTITY: The designer wants EXACTLY ' + itemQty + ' of this item placed in the room. Your change_instruction MUST specify placing ' + itemQty + ' matching copies. Describe how they should be arranged — evenly spaced, symmetrically positioned, or grouped in a way that looks intentional and professionally designed.\n';
+    }
+
+    if (scaleCheckRequested && dimensions) {
+      analysisPrompt += '\nSCALE CHECK REQUESTED: Assess whether an item with dimensions ' + dimensions + ' fits properly in the specified location. Consider room proportions, surrounding furniture, and ergonomic guidelines.\n';
+    }
+
+    analysisPrompt += '\nABSOLUTE RULE — PLACEMENT IS LOCKED: If the user specified ANY placement or position (e.g., "to the left of the window", "next to the bed", "in the corner", "against the far wall"), you MUST copy their EXACT placement words into your change_instruction VERBATIM. Do NOT rephrase, relocate, or "improve" the placement. The user\'s placement is FINAL. If they said "to the left of the window", your change_instruction MUST say "to the left of the window" — not "near the window", not "by the wall", not anything else.\n';
+
+    var analysisJobList = '1. Describe the visual appearance of the item/change in detail (colors, materials, textures, style)\n2. Copy the user\'s placement instructions word-for-word into the change_instruction\n3. Add any relevant scale/proportion notes';
+    if (currentChangeType === 'item' && itemQty > 1) {
+      analysisJobList += '\n4. Your change_instruction MUST start with "Place exactly ' + itemQty + ' of" — the quantity ' + itemQty + ' MUST appear in the change_instruction';
+    }
+    analysisPrompt += '\nYour job is ONLY to:\n' + analysisJobList + '\n\nDo NOT redesign the placement. Do NOT suggest alternative locations. Do NOT omit placement details.\n\nReturn as JSON:\n{\n    "change_instruction": "Specific editing instruction that includes the user\'s EXACT placement words verbatim, the EXACT quantity requested, plus detailed visual description of the item/change",\n    "change_summary": "5-10 word summary of what changed",\n    "scale_assessment": "GOOD" or "CONCERN" or null,\n    "scale_details": "explanation" or null\n}';
+
+    // Build content parts with image(s)
+    var roomContent = currentImage.split(',')[1];
+    var roomMime = currentImage.split(';')[0].split(':')[1];
+
+    var contentParts = [
+      { type: 'image_url', image_url: { url: 'data:' + roomMime + ';base64,' + roomContent } }
+    ];
+
+    if (studioItemBase64 && currentChangeType === 'item') {
+      var itemContent = studioItemBase64.split(',')[1];
+      var itemMime = studioItemBase64.split(';')[0].split(':')[1];
+      contentParts.push({ type: 'image_url', image_url: { url: 'data:' + itemMime + ';base64,' + itemContent } });
+    }
+
+    contentParts.push({ type: 'text', text: analysisPrompt });
+
+    var analysisResp = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://roomvision.ai',
+        'X-Title': 'RoomEdit Pro'
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-3.1-flash-image-preview',
+        messages: [
+          { role: 'system', content: 'You are a precise interior design photo editor. You analyze room photos and produce exact editing instructions. ABSOLUTE RULES: 1) You NEVER override, rephrase, or relocate the user\'s placement choices. If the user says "to the left of the window", your instruction MUST say "to the left of the window" — those exact words. 2) If the user specifies a QUANTITY (e.g., "Place exactly 3"), your change_instruction MUST preserve that exact number. Never drop or change the quantity. 3) You preserve every element the user did not ask to change. Your job is to describe the visual details of what to add/change, while keeping the user\'s placement instructions and quantity word-for-word.' },
+          { role: 'user', content: contentParts }
+        ],
+        temperature: 0.3
+      })
+    });
+
+    var analysisData = await analysisResp.json();
+    if (analysisData.error) throw new Error(analysisData.error.message || 'API error');
+
+    var analysisText = analysisData.choices[0].message.content;
+
+    // Parse JSON from response
+    var parsed = null;
+    try {
+      var jsonMatch = analysisText.match(/```(?:json)?\s*([\s\S]*?)```/);
+      parsed = JSON.parse(jsonMatch ? jsonMatch[1] : analysisText);
+    } catch(e) {
+      try {
+        var objMatch = analysisText.match(/\{[\s\S]*\}/);
+        parsed = objMatch ? JSON.parse(objMatch[0]) : null;
+      } catch(e2) {
+        parsed = null;
+      }
+    }
+
+    if (!parsed || !parsed.change_instruction) {
+      parsed = {
+        change_instruction: analysisText,
+        change_summary: changeDescription.substring(0, 60),
+        scale_assessment: null,
+        scale_details: null
+      };
+    }
+
+    lastChangeDescription = parsed.change_summary || changeDescription.substring(0, 60);
+    if (currentChangeType === 'item' && itemQty > 1) {
+      lastChangeDescription = itemQty + '× ' + lastChangeDescription;
+    }
+
+    // Step 2: Generate image
+    loadingMsg.textContent = 'Rendering the new design...';
+
+    var imagePrompt = 'MANDATORY RULES (read these FIRST before doing anything):\n';
+    if (currentChangeType === 'item' && itemQty > 1) {
+      imagePrompt += '*** QUANTITY RULE (HIGHEST PRIORITY): You MUST place EXACTLY ' + itemQty + ' (the number ' + itemQty + ') of the described item in the image. Count them: you need ' + itemQty + ' separate, individual, distinct copies of this item visible in the final image. Not 1, not ' + (itemQty - 1) + ', not ' + (itemQty + 1) + ' — exactly ' + itemQty + '. ***\n';
+    }
+    imagePrompt += '0. OUTPUT IMAGE SIZE AND FRAMING: Your output image MUST have the EXACT SAME aspect ratio, dimensions, and framing as the input room photo. If the input is landscape/wide, the output MUST be landscape/wide. If the input is portrait/tall, the output MUST be portrait/tall. Do NOT crop, zoom in, zoom out, or change the field of view in ANY way. The edges of the output must show the same content as the edges of the input. This is the #1 most important rule.\n';
+    imagePrompt += '1. PLACEMENT IS NON-NEGOTIABLE: The user\'s placement instruction below is FINAL. Place items EXACTLY where the user specified — not somewhere "better", not centered, not moved for aesthetics. EXACTLY where they said.\n';
+    if (currentChangeType === 'item' && itemQty > 1) {
+      imagePrompt += '2. Place EXACTLY ' + itemQty + ' of the item described below, and make NO other changes. Do NOT move, remove, resize, recolor, or alter ANY other element in the room.\n';
+    } else {
+      imagePrompt += '2. Make ONLY the single change described below. Do NOT move, remove, resize, recolor, or alter ANY other element in the room.\n';
+    }
+    imagePrompt += '3. Every piece of furniture, decoration, fixture, and architectural feature NOT mentioned in the change MUST remain exactly as they are — same position, same color, same size.\n';
+    imagePrompt += '4. Keep the exact same camera angle, perspective, lighting, AND image dimensions/aspect ratio.\n';
+    imagePrompt += '5. The result must look like a real photograph, not a rendering or illustration.\n\n';
+    imagePrompt += 'USER\'S ORIGINAL REQUEST (this is the PRIMARY instruction — follow this EXACTLY):\n';
+    imagePrompt += window._lastChangeDescription + '\n\n';
+    imagePrompt += 'DETAILED VISUAL DESCRIPTION (use this for appearance details only, NOT for placement):\n';
+    imagePrompt += parsed.change_instruction + '\n\n';
+    imagePrompt += 'REMINDER: Place the item EXACTLY where the user said in their original request above. Do not override their placement.\n\n';
+
+    if (studioItemBase64 && currentChangeType === 'item') {
+      if (itemQty > 1) {
+        imagePrompt += 'CRITICAL QUANTITY + ITEM MATCH: The second image shows the EXACT item to place. You MUST place EXACTLY ' + itemQty + ' copies of this EXACT item — same design, same color, same material, same shape, same proportions, same style, same details for EACH of the ' + itemQty + ' copies. All ' + itemQty + ' items must be visually identical to the reference photo and to each other. Arrange them in a natural, evenly-spaced, professionally designed layout. Do NOT substitute similar-looking items. FINAL COUNT CHECK: the output image must contain exactly ' + itemQty + ' of this item.\n\n';
+      } else {
+        imagePrompt += 'CRITICAL: The second image shows the EXACT item to place in the room. You MUST reproduce this EXACT item — same design, same color, same material, same shape, same proportions, same style, same details. Do NOT substitute a similar-looking item. The item in your output must be visually identical to the item in the reference photo.\n\n';
+      }
+    }
+    if (!studioItemBase64 && currentChangeType === 'item' && itemQty > 1) {
+      imagePrompt += 'CRITICAL QUANTITY: Place EXACTLY ' + itemQty + ' of this item. All ' + itemQty + ' must be identical to each other and arranged in a natural, evenly-spaced, professionally designed layout. FINAL COUNT CHECK: the output image must contain exactly ' + itemQty + ' of this item.\n\n';
+    }
+
+    // Original user request is now included at the TOP of the prompt (above the AI's rewrite)
+
+    var imageContentParts = [
+      { type: 'image_url', image_url: { url: 'data:' + roomMime + ';base64,' + roomContent } }
+    ];
+
+    // CRITICAL: Send the item photo to the image generator so it can see the exact item
+    if (studioItemBase64 && currentChangeType === 'item') {
+      var itemContent2 = studioItemBase64.split(',')[1];
+      var itemMime2 = studioItemBase64.split(';')[0].split(':')[1];
+      imageContentParts.push({ type: 'image_url', image_url: { url: 'data:' + itemMime2 + ';base64,' + itemContent2 } });
+    }
+
+    imageContentParts.push({ type: 'text', text: imagePrompt });
+
+    var imageSystemPrompt = 'You are a precise photo editor specializing in interior design.';
+    if (currentChangeType === 'item' && itemQty > 1) {
+      imageSystemPrompt += ' You place EXACTLY the number of items requested — if the user says ' + itemQty + ', you place ' + itemQty + ' distinct copies of that item, no more, no less.';
+    } else {
+      imageSystemPrompt += ' You make exactly one minimal edit to room photographs.';
+    }
+    imageSystemPrompt += ' ABSOLUTE REQUIREMENTS: 1) Your output image MUST have the EXACT same aspect ratio, resolution, and framing as the input photo. NEVER crop, zoom, or change the field of view. If the input is a wide landscape photo, the output must be the same wide landscape. Every edge of the photo must show the same content. 2) You NEVER change elements that were not explicitly requested. 3) You follow the user\'s placement instructions with 100% literal accuracy. If they say "to the left of the window" you place it to the left of the window. You NEVER choose a different location than what the user specified, even if you think another location would look better.';
+
+    var imageMessages = [
+      {
+        role: 'system',
+        content: imageSystemPrompt
+      },
+      {
+        role: 'user',
+        content: imageContentParts
+      }
+    ];
+
+    var imageResp = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://roomvision.ai',
+        'X-Title': 'RoomEdit Pro'
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-3.1-flash-image-preview',
+        messages: imageMessages,
+        temperature: 0.2,
+        modalities: ['image', 'text'],
+        image_config: {
+          aspect_ratio: studioRoomAspectRatio
+        }
+      })
+    });
+
+    var imageData = await imageResp.json();
+
+    var generatedImageUrl = null;
+    if (imageData.choices && imageData.choices[0] && imageData.choices[0].message) {
+      var msg = imageData.choices[0].message;
+      if (msg.images && msg.images.length > 0) {
+        var imgObj = msg.images[0];
+        generatedImageUrl = imgObj.image_url ? imgObj.image_url.url : (typeof imgObj === 'string' ? 'data:image/png;base64,' + imgObj : null);
+      }
+      if (!generatedImageUrl && msg.content && Array.isArray(msg.content)) {
+        for (var i = 0; i < msg.content.length; i++) {
+          var part = msg.content[i];
+          if (part.type === 'image_url' && part.image_url) {
+            generatedImageUrl = part.image_url.url;
+            break;
+          }
+        }
+      }
+    }
+
+    if (!generatedImageUrl) {
+      throw new Error('No image was generated. Please try again.');
+    }
+
+    lastGeneratedImage = generatedImageUrl;
+
+    // Show review
+    clearInterval(msgInterval);
+    loading.classList.remove('active');
+
+    document.getElementById('reviewBefore').src = currentImage;
+    document.getElementById('reviewAfter').src = generatedImageUrl;
+
+    // Scale check
+    var scaleCard = document.getElementById('scaleCheckCard');
+    if (parsed.scale_assessment) {
+      scaleCard.style.display = 'flex';
+      if (parsed.scale_assessment.toUpperCase() === 'GOOD') {
+        scaleCard.className = 'scale-check-card scale-good';
+        document.getElementById('scaleCheckIcon').textContent = '✅';
+      } else {
+        scaleCard.className = 'scale-check-card scale-concern';
+        document.getElementById('scaleCheckIcon').textContent = '⚠️';
+      }
+      document.getElementById('scaleCheckText').textContent = parsed.scale_details || parsed.scale_assessment;
+    } else {
+      scaleCard.style.display = 'none';
+    }
+
+    // Reset product suggestions section (visible for all change types)
+    document.getElementById('productResults').innerHTML = '';
+
+    document.getElementById('studioReview').classList.add('active');
+    document.getElementById('studioReview').scrollIntoView({ behavior: 'smooth' });
+
+  } catch (error) {
+    clearInterval(msgInterval);
+    loading.classList.remove('active');
+    showToast('Something went wrong: ' + error.message);
+    console.error(error);
+  } finally {
+    isApplying = false;
+  }
+}
+
+// ==================== KEEP / DISCARD / RETRY ====================
+function keepChange() {
+  if (!lastGeneratedImage) return;
+
+  designHistory.push({
+    image: lastGeneratedImage,
+    description: lastChangeDescription,
+    timestamp: new Date()
+  });
+
+  // Update current room display
+  document.getElementById('currentRoomImg').src = lastGeneratedImage;
+
+  // Update timeline
+  updateTimeline();
+
+  // Clear review and controls
+  document.getElementById('studioReview').classList.remove('active');
+  clearChangeInputs();
+
+  markUnsavedChanges();
+  showToast('Change saved! Make another change or you\'re done.');
+
+  // Scroll to current room
+  document.getElementById('currentRoomImg').scrollIntoView({ behavior: 'smooth' });
+}
+
+function discardChange() {
+  document.getElementById('studioReview').classList.remove('active');
+  lastGeneratedImage = null;
+  showToast('Change discarded.');
+}
+
+function retryChange() {
+  document.getElementById('studioReview').classList.remove('active');
+  applyChange();
+}
+
+// ==================== TIMELINE ====================
+function undoToState(index) {
+  if (index < 0 || index >= designHistory.length) return;
+
+  var removingCount = designHistory.length - 1 - index;
+  if (removingCount > 1) {
+    if (!confirm('This will undo ' + removingCount + ' changes. Continue?')) return;
+  }
+
+  designHistory = designHistory.slice(0, index + 1);
+  document.getElementById('currentRoomImg').src = designHistory[designHistory.length - 1].image;
+  updateTimeline();
+  document.getElementById('studioReview').classList.remove('active');
+  markUnsavedChanges();
+  showToast('Reverted to previous state.');
+}
+
+function showCompareAll() {
+  if (designHistory.length < 2) {
+    showToast('Make at least one change first to compare');
+    return;
+  }
+  var html = '';
+  // First: original vs final side by side
+  html += '<div style="margin-bottom:32px;">';
+  html += '<h3 style="font-size:1.1rem; font-weight:700; color:#333; margin-bottom:16px;">Original vs Final</h3>';
+  html += '<div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">';
+  html += '<div style="text-align:center;"><div style="font-size:12px; font-weight:700; color:#999; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Before</div><img src="' + designHistory[0].image + '" style="width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.1);"></div>';
+  html += '<div style="text-align:center;"><div style="font-size:12px; font-weight:700; color:#27ae60; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">After (' + (designHistory.length - 1) + ' changes)</div><img src="' + designHistory[designHistory.length - 1].image + '" style="width:100%; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.1);"></div>';
+  html += '</div></div>';
+
+  // Then: step-by-step timeline
+  html += '<h3 style="font-size:1.1rem; font-weight:700; color:#333; margin-bottom:16px;">Step-by-Step Changes</h3>';
+  for (var i = 0; i < designHistory.length; i++) {
+    var step = designHistory[i];
+    var isFirst = i === 0;
+    var label = isFirst ? 'Original Room' : 'Step ' + i + ': ' + step.description;
+    var borderColor = isFirst ? '#ddd' : 'var(--accent)';
+    html += '<div style="display:flex; gap:16px; margin-bottom:20px; align-items:flex-start;">';
+    html += '<div style="flex-shrink:0; width:48px; text-align:center;">';
+    html += '<div style="width:32px; height:32px; border-radius:50%; background:' + (isFirst ? '#eee' : 'var(--accent)') + '; color:' + (isFirst ? '#666' : 'white') + '; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin:0 auto;">' + (isFirst ? '○' : i) + '</div>';
+    if (i < designHistory.length - 1) html += '<div style="width:2px; height:40px; background:#e0d5cc; margin:4px auto;"></div>';
+    html += '</div>';
+    html += '<div style="flex:1;">';
+    html += '<div style="font-size:13px; font-weight:600; color:#333; margin-bottom:6px;">' + label + '</div>';
+    html += '<img src="' + step.image + '" style="width:100%; max-width:460px; border-radius:10px; border:2px solid ' + borderColor + ';">';
+    html += '</div></div>';
+  }
+
+  document.getElementById('compareContent').innerHTML = html;
+  document.getElementById('compareOverlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCompareAll() {
+  document.getElementById('compareOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function downloadCurrentDesign() {
+  var img = document.getElementById('currentRoomImg');
+  if (!img.src || img.src === window.location.href) {
+    showToast('No design to download yet');
+    return;
+  }
+  var a = document.createElement('a');
+  a.href = img.src;
+  var projectName = currentProjectId ? (document.getElementById('currentProjectBar') ? 'RoomEdit-Design' : 'RoomEdit-Design') : 'RoomEdit-Design';
+  a.download = projectName + '-' + new Date().toISOString().slice(0,10) + '.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast('Image downloaded');
+}
+
+function updateTimeline() {
+  var timeline = document.getElementById('designTimeline');
+  timeline.innerHTML = '';
+
+  for (var i = 0; i < designHistory.length; i++) {
+    if (i > 0) {
+      var arrow = document.createElement('div');
+      arrow.className = 'timeline-arrow';
+      arrow.textContent = '→';
+      timeline.appendChild(arrow);
+    }
+
+    var entry = designHistory[i];
+    var entryEl = document.createElement('div');
+    entryEl.className = 'timeline-entry' + (i === designHistory.length - 1 ? ' current' : '');
+
+    var html = '<img class="timeline-thumb" src="' + entry.image + '" alt="' + entry.description + '" onclick="previewState(' + i + ')">';
+html += '<div class="timeline-label">' + entry.description + '</div>';
+
+    if (i > 0) {
+      html += '<button class="timeline-remove" onclick="event.stopPropagation(); undoToState(' + (i - 1) + ')" title="Undo this and all later changes">✕</button>';
+    }
+
+    entryEl.innerHTML = html;
+    timeline.appendChild(entryEl);
+  }
+
+  // Scroll timeline to end
+  timeline.scrollLeft = timeline.scrollWidth;
+}
+
+function previewState(index) {
+  document.getElementById('currentRoomImg').src = designHistory[index].image;
+  // Highlight the previewed entry
+  document.querySelectorAll('.timeline-entry').forEach(function(el, i) {
+    el.classList.toggle('current', i === index);
+  });
+}
+
+// ==================== CLEAR / RESET ====================
+function clearChangeInputs() {
+  document.getElementById('studio-item-desc').value = '';
+  document.getElementById('studio-placement').value = '';
+  document.getElementById('studio-width').value = '';
+  document.getElementById('studio-height').value = '';
+  document.getElementById('studio-depth').value = '';
+  document.getElementById('studio-check-scale').checked = false;
+  document.getElementById('studio-item-qty').value = 1;
+  document.getElementById('studio-wall-color').value = '';
+  document.getElementById('studio-wall-area').value = '';
+  document.getElementById('studio-floor-area').value = '';
+  document.getElementById('studio-notes').value = '';
+  studioItemBase64 = null;
+  selectedFloor = '';
+  lastItemDescription = '';
+
+  // Clear placement suggestions
+  document.getElementById('placementSuggestions').classList.remove('active');
+  document.getElementById('suggestionCards').innerHTML = '';
+
+  var preview = document.getElementById('studioItemImg');
+  preview.style.display = 'none';
+  preview.src = '';
+  document.getElementById('studioItemUpload').classList.remove('has-image');
+
+  var customField = document.getElementById('studio-custom-change');
+  if (customField) customField.value = '';
+
+  // Clear redesign fields
+  var redesignStyle = document.getElementById('studio-redesign-style');
+  if (redesignStyle) redesignStyle.value = '';
+  var redesignKeep = document.getElementById('studio-redesign-keep');
+  if (redesignKeep) redesignKeep.value = '';
+  selectedStyle = '';
+
+  document.querySelectorAll('.color-swatch').forEach(function(s) { s.classList.remove('selected'); });
+  document.querySelectorAll('.flooring-opt').forEach(function(o) { o.classList.remove('selected'); });
+  document.querySelectorAll('.style-opt').forEach(function(o) { o.classList.remove('selected'); });
+
+  // Hide panels
+  document.querySelectorAll('.change-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.change-type-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('designerNotesArea').style.display = 'none';
+  currentChangeType = '';
+}
+
+function startOver() {
+  if (designHistory.length > 1 || currentProjectId) {
+    if (!confirm('Start over? All changes will be lost.')) return;
+  }
+  designHistory = [];
+  studioRoomBase64 = null;
+  studioItemBase64 = null;
+  lastGeneratedImage = null;
+  currentProjectId = null;
+  projectHasUnsavedChanges = false;
+  _designHistoryLengthAtSave = 0;
+  hideProjectIndicator();
+  clearChangeInputs();
+
+  document.getElementById('studioWorkspace').style.display = 'none';
+  document.getElementById('studioUploadArea').style.display = '';
+  document.getElementById('studioHeader').style.display = '';
+  document.getElementById('studioReview').classList.remove('active');
+  document.getElementById('studioLoading').classList.remove('active');
+  document.getElementById('designTimeline').innerHTML = '';
+  document.getElementById('studioRoomInput').value = '';
+}
+
+// ==================== FIND REAL PRODUCTS ====================
+async function findRealProducts() {
+  var shopFor = document.getElementById('shopForInput').value.trim();
+  if (!shopFor) {
+    alert('Please type what you want to shop for — e.g. "couch", "table", or "entire look"');
+    return;
+  }
+
+  var resultsDiv = document.getElementById('productResults');
+  resultsDiv.innerHTML = '<div class="loading-spinner" style="margin:20px auto;"></div><p style="text-align:center;color:#888;">Identifying items in this design...</p>';
+
+  // Reset card counter for fresh IDs
+  _serpCardCounter = 0;
+
+  // Get the current room image
+  var afterImage = lastGeneratedImage || designHistory[designHistory.length - 1].image;
+  var beforeImage = designHistory.length > 1 ? designHistory[designHistory.length - 2].image : null;
+
+  try {
+    // Step 1: Ask AI to identify items and provide good search queries
+    var isEntireLook = shopFor.toLowerCase().match(/entire|everything|all|whole|full/);
+    var prompt = 'IMPORTANT: Look carefully at this room image.\n\n' +
+      (isEntireLook ?
+        'Identify the 5 most prominent/important items visible in this room. For each item, describe EXACTLY what you see — material, finish, color, style, shape.' :
+        'The designer wants to shop for: "' + shopFor + '". Look at the image and identify items matching that description. Describe EXACTLY what you see — material, finish, color, style, shape.') +
+'\n\nFor EACH item, provide a HIGHLY SPECIFIC Google Shopping search query that would find a matching product.' +
+      '\n\nRules:\n- ' + (isEntireLook ? '5' : '3') + ' items maximum\n- Search queries MUST be ultra-specific: include finish, material, color, style, and type' +
+      '\n- GOOD: "brushed nickel single handle waterfall bathroom faucet"' +
+      '\n- BAD: "faucet" or "bathroom fixtures"' +
+      '\n\nReturn as JSON:\n{\n  "items": [\n    {\n      "item_type": "Navy Velvet Tufted Sofa",\n      "what_i_see": "A navy blue velvet 3-seat sofa with diamond tufting and tapered gold legs",\n      "search": "navy blue velvet tufted 3-seat sofa gold legs"\n    }\n  ]\n}' + getManufacturerPromptText();
+
+    var messageContent = [];
+    if (beforeImage) {
+      messageContent.push({ type: 'image_url', image_url: { url: beforeImage } });
+      messageContent.push({ type: 'text', text: 'BEFORE (original room):' });
+    }
+    messageContent.push({ type: 'image_url', image_url: { url: afterImage } });
+    messageContent.push({ type: 'text', text: (beforeImage ? 'AFTER (with changes applied). ' : '') + prompt });
+
+    var messages = [{
+      role: 'user',
+      content: messageContent
+    }];
+
+    var resp = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.href
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-3.1-flash-image-preview',
+        messages: messages,
+        max_tokens: 1500
+      })
+    });
+
+    var data = await resp.json();
+    var text = data.choices[0].message.content;
+
+    // Parse JSON from AI response
+    var parsed;
+    try {
+      var jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      parsed = JSON.parse(jsonMatch ? jsonMatch[1] : text);
+    } catch(e) {
+      try {
+        var objMatch = text.match(/\{[\s\S]*\}/);
+        parsed = objMatch ? JSON.parse(objMatch[0]) : null;
+      } catch(e2) {
+        parsed = null;
+      }
+    }
+
+    if (!parsed || !parsed.items || !parsed.items.length) {
+      throw new Error('AI could not identify items');
+    }
+
+    // Step 2: Show skeleton loaders grouped by item
+    var skeletonHtml = '';
+    parsed.items.forEach(function(item, groupIdx) {
+      skeletonHtml += '<div class="serp-item-group" id="serp-group-' + groupIdx + '">' +
+        '<div class="serp-item-group-title">' + escHtml(item.item_type) + '</div>' +
+        '<div class="serp-item-group-desc">' + escHtml(item.what_i_see || '') + '</div>' +
+        '<div class="serp-product-grid" id="serp-grid-' + groupIdx + '">' +
+        renderSerpSkeletons(4) +
+        '</div></div>';
+    });
+    resultsDiv.innerHTML = skeletonHtml;
+
+    // Step 3: For each item, call SerpAPI and render real products
+    var directLinkQueue = [];
+
+    await Promise.all(parsed.items.map(async function(item, groupIdx) {
+      try {
+        var results = await searchSerpAPI(item.search);
+        var gridEl = document.getElementById('serp-grid-' + groupIdx);
+        if (!gridEl) return;
+
+        if (results.length === 0) {
+          gridEl.innerHTML = '<p style="color:#999; font-size:13px; padding:8px;">No products found for this search. Try a different term.</p>';
+          return;
+        }
+
+        // Remember current counter position so we can wire up direct links
+        var startIdx = _serpCardCounter;
+        gridEl.innerHTML = renderSerpCards(results, groupIdx);
+
+        // Queue up direct link fetches
+        results.forEach(function(product, i) {
+          if (product.immersive_product_page_token) {
+            directLinkQueue.push({
+              token: product.immersive_product_page_token,
+              cardIdx: startIdx + i
+            });
+          }
+        });
+      } catch (err) {
+        var gridEl = document.getElementById('serp-grid-' + groupIdx);
+        if (gridEl) {
+          gridEl.innerHTML = '<p style="color:#e74c3c; font-size:13px; padding:8px;">Search failed — try again.</p>';
+        }
+      }
+    }));
+
+    // Step 4: Fetch direct retailer links in background (don't await)
+    directLinkQueue.forEach(function(job) {
+      fetchDirectLink(job.token, job.cardIdx);
+    });
+
+  } catch(error) {
+    resultsDiv.innerHTML = '<p style="color:#e74c3c; text-align:center;">Could not find products. Try again.</p>';
+    console.error(error);
+  }
+}
+
+async function rateDesign() {
+  var resultsDiv = document.getElementById('ratingResults');
+  resultsDiv.innerHTML = '<div class="loading-spinner" style="margin:20px auto;"></div><p style="text-align:center;color:#888;">Analyzing your design...</p>';
+
+  var currentImage = lastGeneratedImage || (designHistory.length ? designHistory[designHistory.length - 1].image : null);
+  if (!currentImage) {
+    resultsDiv.innerHTML = '<p style="color:#e74c3c; text-align:center;">No design to rate yet. Make some changes first!</p>';
+    return;
+  }
+
+  try {
+    var dims = roomDimensions ? '\nRoom dimensions: ' + roomDimensions : '';
+    var prompt = 'You are an expert interior designer and design critic. Rate this room design on a scale of 1-10 across these categories:\n\n1. OVERALL DESIGN COHESION — Do the elements work together? Is there a clear style?\n2. COLOR HARMONY — Do the colors complement each other? Is there good contrast and balance?\n3. SCALE & PROPORTION — Are furniture and items properly sized for the space? Does anything look too big, too small, or awkwardly placed?' + dims + '\n4. FUNCTIONALITY — Does the layout make practical sense? Is there good flow and usability?\n5. VISUAL INTEREST — Is there enough variety, texture, and focal points without being cluttered?\n\nFor each category, give:\n- A score (1-10)\n- A brief reason (1-2 sentences)\n\nThen give an OVERALL SCORE (1-10) and list 3-5 specific actionable suggestions to improve the design. Be honest — if something looks off, say so clearly.\n\nReturn as JSON:\n{\n  "overall_score": 7,\n  "overall_label": "Good — A solid design with room to elevate",\n  "categories": [\n    {"name": "Design Cohesion", "score": 8, "reason": "The modern minimalist style is consistent..."},\n    {"name": "Color Harmony", "score": 6, "reason": "The warm tones work but..."},\n    {"name": "Scale & Proportion", "score": 7, "reason": "Most pieces are well-sized..."},\n    {"name": "Functionality", "score": 7, "reason": "Good traffic flow..."},\n    {"name": "Visual Interest", "score": 6, "reason": "Could use more texture..."}\n  ],\n  "suggestions": [\n    "Add a textured throw pillow in a contrasting color to the sofa",\n    "The coffee table appears slightly too large for the seating area — consider downsizing by 20%",\n    "Introduce a floor lamp in the far corner to balance the lighting"\n  ]\n}';
+
+    var resp = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.href
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-3.1-flash-image-preview',
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image_url', image_url: { url: currentImage } },
+            { type: 'text', text: prompt }
+          ]
+        }],
+        max_tokens: 2000
+      })
+    });
+
+    var data = await resp.json();
+    var text = data.choices[0].message.content;
+
+    var parsed;
+    try {
+      var jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      parsed = JSON.parse(jsonMatch ? jsonMatch[1] : text);
+    } catch(e) {
+      try {
+        var objMatch = text.match(/\{[\s\S]*\}/);
+        parsed = objMatch ? JSON.parse(objMatch[0]) : null;
+      } catch(e2) {
+        parsed = null;
+      }
+    }
+
+    if (!parsed || !parsed.categories) {
+      throw new Error('Could not parse rating');
+    }
+
+    var scoreClass = parsed.overall_score >= 7 ? 'high' : (parsed.overall_score >= 5 ? 'medium' : 'low');
+    var html = '<div class="rating-card">';
+    html += '<div class="rating-score ' + scoreClass + '">' + parsed.overall_score + '/10</div>';
+    html += '<div class="rating-label">' + parsed.overall_label + '</div>';
+
+    parsed.categories.forEach(function(cat) {
+      var catClass = cat.score >= 7 ? 'color:#27ae60' : (cat.score >= 5 ? 'color:#f39c12' : 'color:#e74c3c');
+      html += '<div class="rating-category">';
+      html += '<h4>' + cat.name + '</h4>';
+      html += '<div class="cat-score" style="' + catClass + '">' + cat.score + '/10</div>';
+      html += '<p>' + cat.reason + '</p>';
+      html += '</div>';
+    });
+
+    if (parsed.suggestions && parsed.suggestions.length) {
+      html += '<div class="rating-suggestions">';
+      html += '<h4>💡 Suggestions to Improve</h4><ul>';
+      parsed.suggestions.forEach(function(s) {
+        html += '<li>' + s + '</li>';
+      });
+      html += '</ul></div>';
+    }
+
+    html += '</div>';
+    resultsDiv.innerHTML = html;
+
+  } catch(error) {
+    resultsDiv.innerHTML = '<p style="color:#e74c3c; text-align:center;">Could not rate design. Try again.</p>';
+    console.error(error);
+  }
+}
+
+// ==================== MY PROJECTS (IndexedDB) ====================
+var currentProjectId = null;
+var projectHasUnsavedChanges = false;
+var _designHistoryLengthAtSave = 0;
+
+// --- IndexedDB Wrapper ---
+function openProjectsDB() {
+  return new Promise(function(resolve, reject) {
+    var request = indexedDB.open('roomedit_projects', 1);
+    request.onupgradeneeded = function(e) {
+      var db = e.target.result;
+      if (!db.objectStoreNames.contains('projects')) {
+        db.createObjectStore('projects', { keyPath: 'id', autoIncrement: true });
+      }
+    };
+    request.onsuccess = function(e) { resolve(e.target.result); };
+    request.onerror = function(e) { reject(e.target.error); };
+  });
+}
+
+function saveProject(projectData) {
+  return openProjectsDB().then(function(db) {
+    return new Promise(function(resolve, reject) {
+      var tx = db.transaction('projects', 'readwrite');
+      var store = tx.objectStore('projects');
+      var req = store.put(projectData);
+      req.onsuccess = function() { resolve(req.result); };
+      req.onerror = function() { reject(req.error); };
+    });
+  });
+}
+
+function getAllProjects() {
+  return openProjectsDB().then(function(db) {
+    return new Promise(function(resolve, reject) {
+      var tx = db.transaction('projects', 'readonly');
+      var store = tx.objectStore('projects');
+      var req = store.getAll();
+      req.onsuccess = function() { resolve(req.result || []); };
+      req.onerror = function() { reject(req.error); };
+    });
+  });
+}
+
+function deleteProject(id) {
+  return openProjectsDB().then(function(db) {
+    return new Promise(function(resolve, reject) {
+      var tx = db.transaction('projects', 'readwrite');
+      var store = tx.objectStore('projects');
+      var req = store.delete(id);
+      req.onsuccess = function() { resolve(); };
+      req.onerror = function() { reject(req.error); };
+    });
+  });
+}
+
+function updateProject(id, updates) {
+  return openProjectsDB().then(function(db) {
+    return new Promise(function(resolve, reject) {
+      var tx = db.transaction('projects', 'readwrite');
+      var store = tx.objectStore('projects');
+      var getReq = store.get(id);
+      getReq.onsuccess = function() {
+        var existing = getReq.result;
+        if (!existing) { reject(new Error('Project not found')); return; }
+        for (var key in updates) {
+          if (updates.hasOwnProperty(key)) existing[key] = updates[key];
+        }
+        var putReq = store.put(existing);
+        putReq.onsuccess = function() { resolve(existing); };
+        putReq.onerror = function() { reject(putReq.error); };
+      };
+      getReq.onerror = function() { reject(getReq.error); };
+    });
+  });
+}
+
+// --- Folders (localStorage) ---
+function getProjectFolders() {
+  try { return JSON.parse(localStorage.getItem('roomedit_folders') || '[]'); }
+  catch(e) { return []; }
+}
+
+function saveProjectFolders(folders) {
+  localStorage.setItem('roomedit_folders', JSON.stringify(folders));
+}
+
+function createProjectFolder() {
+  var name = prompt('Folder name:');
+  if (!name || !name.trim()) return;
+  name = name.trim();
+  var folders = getProjectFolders();
+  if (folders.indexOf(name) !== -1) {
+    showToast('Folder "' + name + '" already exists');
+    return;
+  }
+  folders.push(name);
+  saveProjectFolders(folders);
+  renderProjectsList();
+  showToast('Folder "' + name + '" created');
+}
+
+function deleteProjectFolder(folderName) {
+  if (!confirm('Delete folder "' + folderName + '"? Projects inside will move to Unsorted.')) return;
+  getAllProjects().then(function(projects) {
+    var promises = [];
+    projects.forEach(function(p) {
+      if (p.folder === folderName) {
+        promises.push(updateProject(p.id, { folder: '' }));
+      }
+    });
+    return Promise.all(promises);
+  }).then(function() {
+    var folders = getProjectFolders();
+    var idx = folders.indexOf(folderName);
+    if (idx !== -1) folders.splice(idx, 1);
+    saveProjectFolders(folders);
+    renderProjectsList();
+    showToast('Folder deleted — projects moved to Unsorted');
+  });
+}
+
+// --- Thumbnail generation ---
+function generateThumbnail(imageDataUrl) {
+  return new Promise(function(resolve) {
+    var img = new Image();
+    img.onload = function() {
+      var w = 200;
+      var h = Math.round(img.height * (w / img.width));
+      var canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.onerror = function() { resolve(imageDataUrl); };
+    img.src = imageDataUrl;
+  });
+}
+
+// --- Toggle Projects Panel ---
+function toggleProjects() {
+  var panel = document.getElementById('projectsPanel');
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+    renderProjectsList();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+// --- Render Projects List ---
+function renderProjectsList() {
+  var area = document.getElementById('projectsListArea');
+  var saveBtn = document.getElementById('btnSaveProject');
+  var hasActiveDesign = studioRoomBase64 && designHistory.length > 0;
+  saveBtn.disabled = !hasActiveDesign;
+
+  getAllProjects().then(function(projects) {
+    if (projects.length === 0) {
+      area.innerHTML = '<div class="projects-empty">No saved projects yet. Upload a room and start designing, then save your work here.</div>';
+      return;
+    }
+
+    var folders = getProjectFolders();
+    var folderMap = {};
+    folders.forEach(function(f) { folderMap[f] = []; });
+    folderMap['_unsorted'] = [];
+
+    projects.forEach(function(p) {
+      if (p.folder && folderMap[p.folder]) {
+        folderMap[p.folder].push(p);
+      } else {
+        folderMap['_unsorted'].push(p);
+      }
+    });
+
+    // Sort projects by updatedAt descending
+    var sortByDate = function(a, b) {
+      return new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt);
+    };
+
+    var html = '';
+
+    // Named folders first
+    folders.forEach(function(folderName) {
+      var fProjects = folderMap[folderName];
+      fProjects.sort(sortByDate);
+      html += buildFolderSection(folderName, fProjects, true);
+    });
+
+    // Unsorted
+    var unsorted = folderMap['_unsorted'];
+    unsorted.sort(sortByDate);
+    if (unsorted.length > 0 || folders.length > 0) {
+      html += buildFolderSection('Unsorted', unsorted, false);
+    }
+
+    area.innerHTML = html;
+  }).catch(function(err) {
+    console.error('Error loading projects:', err);
+    area.innerHTML = '<div class="projects-empty">Error loading projects.</div>';
+  });
+}
+
+function buildFolderSection(folderName, projects, canDelete) {
+  var folderId = 'folder_' + folderName.replace(/[^a-zA-Z0-9]/g, '_');
+  var html = '<div class="project-folder-section">';
+  html += '<div class="project-folder-header" onclick="toggleFolder(\'' + folderId + '\', this)">';
+  html += '<span class="project-folder-arrow expanded">&#9654;</span>';
+  html += '<span class="project-folder-name">' + folderName + '</span>';
+  html += '<span class="project-folder-count">' + projects.length + ' project' + (projects.length !== 1 ? 's' : '') + '</span>';
+  if (canDelete) {
+    html += '<button class="project-folder-delete" onclick="event.stopPropagation(); deleteProjectFolder(\'' + folderName.replace(/'/g, "\\'") + '\')" title="Delete folder">&#128465;</button>';
+  }
+  html += '</div>';
+  html += '<div class="project-folder-body" id="' + folderId + '">';
+
+  if (projects.length === 0) {
+    html += '<div class="projects-empty" style="padding:12px;">No projects in this folder</div>';
+  } else {
+    html += '<div class="project-cards-grid">';
+    projects.forEach(function(p) {
+      var dateStr = p.updatedAt ? new Date(p.updatedAt).toLocaleDateString() : (p.createdAt ? new Date(p.createdAt).toLocaleDateString() : '');
+      var isActive = currentProjectId === p.id;
+      html += '<div class="project-card-item' + (isActive ? ' active-project' : '') + '">';
+      html += '<img class="project-card-thumb" src="' + (p.thumbnail || '') + '" alt="' + (p.name || '') + '" onerror="this.style.background=\'#f0ebe6\'">';
+      html += '<div class="project-card-info">';
+      html += '<div class="project-card-name" title="' + (p.name || '') + '">' + (p.name || 'Untitled') + (isActive ? ' (open)' : '') + '</div>';
+      html += '<div class="project-card-date">' + dateStr + '</div>';
+      html += '<div class="project-card-actions">';
+      html += '<button class="btn-open-project" onclick="openProject(' + p.id + ')">Open</button>';
+      html += '<button class="btn-move-project" onclick="moveProjectPrompt(' + p.id + ')">Move</button>';
+      html += '<button class="btn-delete-project" onclick="deleteProjectConfirm(' + p.id + ')">Del</button>';
+      html += '</div></div></div>';
+    });
+    html += '</div>';
+  }
+
+  html += '</div></div>';
+  return html;
+}
+
+function toggleFolder(folderId, headerEl) {
+  var body = document.getElementById(folderId);
+  var arrow = headerEl.querySelector('.project-folder-arrow');
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    arrow.classList.add('expanded');
+  } else {
+    body.style.display = 'none';
+    arrow.classList.remove('expanded');
+  }
+}
+
+// --- Save Dialog ---
+function openSaveDialog() {
+  if (!studioRoomBase64 || designHistory.length === 0) {
+    showToast('Nothing to save — upload a room first');
+    return;
+  }
+
+  var now = new Date();
+  var defaultName = 'Untitled — ' + now.toLocaleDateString();
+  var folders = getProjectFolders();
+
+  var overlay = document.createElement('div');
+  overlay.className = 'save-dialog-overlay';
+  overlay.id = 'saveDialogOverlay';
+
+  var folderOptions = '<option value="">No folder</option>';
+  folders.forEach(function(f) {
+    folderOptions += '<option value="' + f + '">' + f + '</option>';
+  });
+
+  overlay.innerHTML = '<div class="save-dialog">' +
+    '<h3>' + (currentProjectId ? 'Update Project' : 'Save Project') + '</h3>' +
+    '<label>Project Name</label>' +
+    '<input type="text" id="saveProjectName" value="' + defaultName + '" />' +
+    '<label>Folder</label>' +
+    '<select id="saveProjectFolder">' + folderOptions + '</select>' +
+    '<div class="save-dialog-actions">' +
+    '<button class="btn-save-cancel" onclick="closeSaveDialog()">Cancel</button>' +
+    '<button class="btn-save-confirm" onclick="executeSaveProject()">Save</button>' +
+    '</div></div>';
+
+  document.body.appendChild(overlay);
+
+  // If updating existing project, prefill
+  if (currentProjectId) {
+    getAllProjects().then(function(projects) {
+      var existing = projects.find(function(p) { return p.id === currentProjectId; });
+      if (existing) {
+        document.getElementById('saveProjectName').value = existing.name || defaultName;
+        document.getElementById('saveProjectFolder').value = existing.folder || '';
+      }
+    });
+  }
+
+  // Focus the name input and select all text
+  setTimeout(function() {
+    var nameInput = document.getElementById('saveProjectName');
+    nameInput.focus();
+    nameInput.select();
+  }, 100);
+}
+
+function closeSaveDialog() {
+  var overlay = document.getElementById('saveDialogOverlay');
+  if (overlay) overlay.remove();
+}
+
+async function executeSaveProject() {
+  var name = document.getElementById('saveProjectName').value.trim() || 'Untitled';
+  var folder = document.getElementById('saveProjectFolder').value;
+
+  var latestImage = designHistory.length > 0 ? designHistory[designHistory.length - 1].image : studioRoomBase64;
+  var thumbnail = await generateThumbnail(latestImage);
+  var now = new Date().toISOString();
+
+  // Serialize designHistory (strip huge images into a storable form)
+  var historyToSave = designHistory.map(function(h) {
+    return {
+      image: h.image,
+      description: h.description,
+      timestamp: h.timestamp instanceof Date ? h.timestamp.toISOString() : h.timestamp
+    };
+  });
+
+  if (currentProjectId) {
+    // Update existing
+    await updateProject(currentProjectId, {
+      name: name,
+      folder: folder,
+      updatedAt: now,
+      roomImage: studioRoomBase64,
+      designHistory: historyToSave,
+      roomDimensions: roomDimensions,
+      thumbnail: thumbnail
+    });
+    showToast('Project updated!');
+  } else {
+    // Create new
+    var projectData = {
+      name: name,
+      folder: folder,
+      createdAt: now,
+      updatedAt: now,
+      roomImage: studioRoomBase64,
+      designHistory: historyToSave,
+      roomDimensions: roomDimensions,
+      thumbnail: thumbnail
+    };
+    var newId = await saveProject(projectData);
+    currentProjectId = newId;
+    showToast('Project saved!');
+  }
+
+  projectHasUnsavedChanges = false;
+  _designHistoryLengthAtSave = designHistory.length;
+  updateProjectIndicator(name);
+  closeSaveDialog();
+  renderProjectsList();
+}
+
+// --- Open Project ---
+function openProject(id) {
+  if (projectHasUnsavedChanges && currentProjectId) {
+    if (!confirm('You have unsaved changes. Open a different project anyway?')) return;
+  }
+
+  getAllProjects().then(function(projects) {
+    var project = projects.find(function(p) { return p.id === id; });
+    if (!project) {
+      showToast('Project not found');
+      return;
+    }
+
+    // Restore state
+    studioRoomBase64 = project.roomImage;
+    roomDimensions = project.roomDimensions || '';
+
+    // Restore design history
+    designHistory = (project.designHistory || []).map(function(h) {
+      return {
+        image: h.image,
+        description: h.description,
+        timestamp: new Date(h.timestamp)
+      };
+    });
+
+    if (designHistory.length === 0 && studioRoomBase64) {
+      designHistory = [{
+        image: studioRoomBase64,
+        description: 'Original Room',
+        timestamp: new Date()
+      }];
+    }
+
+    currentProjectId = id;
+    projectHasUnsavedChanges = false;
+    _designHistoryLengthAtSave = designHistory.length;
+
+    // Show workspace, collapse header
+    document.getElementById('studioUploadArea').style.display = 'none';
+    document.getElementById('studioHeader').style.display = 'none';
+    document.getElementById('studioWorkspace').style.display = 'block';
+
+    // Set current room image
+    var latestImage = designHistory[designHistory.length - 1].image;
+    document.getElementById('currentRoomImg').src = latestImage;
+
+    // Update timeline
+    updateTimeline();
+
+    // Clear any open review
+    document.getElementById('studioReview').classList.remove('active');
+    document.getElementById('studioLoading').classList.remove('active');
+    clearChangeInputs();
+
+    // Restore room dimensions in input fields
+    if (roomDimensions) {
+      var lenMatch = roomDimensions.match(/Length:\s*([^,]+)/);
+      var widMatch = roomDimensions.match(/Width:\s*([^,]+)/);
+      var ceiMatch = roomDimensions.match(/Ceiling height:\s*(.+)/);
+      if (lenMatch) document.getElementById('room-length').value = lenMatch[1].trim();
+      if (widMatch) document.getElementById('room-width').value = widMatch[1].trim();
+      if (ceiMatch) document.getElementById('room-ceiling').value = ceiMatch[1].trim();
+    }
+
+    updateProjectIndicator(project.name);
+
+    // Close projects panel and scroll to workspace
+    document.getElementById('projectsPanel').style.display = 'none';
+    document.getElementById('studioWorkspace').scrollIntoView({ behavior: 'smooth' });
+    showToast('Opened: ' + project.name);
+    renderProjectsList();
+  });
+}
+
+// --- Delete Project ---
+function deleteProjectConfirm(id) {
+  if (!confirm('Delete this project permanently?')) return;
+  deleteProject(id).then(function() {
+    if (currentProjectId === id) {
+      currentProjectId = null;
+      projectHasUnsavedChanges = false;
+      hideProjectIndicator();
+    }
+    renderProjectsList();
+    showToast('Project deleted');
+  });
+}
+
+// --- Move Project ---
+function moveProjectPrompt(id) {
+  var folders = getProjectFolders();
+  if (folders.length === 0) {
+    showToast('Create a folder first');
+    return;
+  }
+
+  var choice = prompt('Move to folder:\n' + folders.map(function(f, i) { return (i + 1) + '. ' + f; }).join('\n') + '\n\nType folder number (or 0 for Unsorted):');
+  if (choice === null) return;
+
+  var num = parseInt(choice, 10);
+  var targetFolder = '';
+  if (num > 0 && num <= folders.length) {
+    targetFolder = folders[num - 1];
+  }
+
+  updateProject(id, { folder: targetFolder }).then(function() {
+    renderProjectsList();
+    showToast(targetFolder ? 'Moved to ' + targetFolder : 'Moved to Unsorted');
+  });
+}
+
+// --- Project Indicator ---
+function updateProjectIndicator(name) {
+  var indicator = document.getElementById('currentProjectIndicator');
+  var nameEl = document.getElementById('currentProjectName');
+  var badge = document.getElementById('unsavedBadge');
+  indicator.style.display = 'flex';
+  nameEl.textContent = name;
+  badge.style.display = projectHasUnsavedChanges ? 'inline-block' : 'none';
+}
+
+function hideProjectIndicator() {
+  document.getElementById('currentProjectIndicator').style.display = 'none';
+}
+
+// --- Track unsaved changes ---
+function markUnsavedChanges() {
+  if (currentProjectId && designHistory.length !== _designHistoryLengthAtSave) {
+    projectHasUnsavedChanges = true;
+    var badge = document.getElementById('unsavedBadge');
+    if (badge) badge.style.display = 'inline-block';
+  }
+}
+
+// ==================== NAV ====================
+function initNav() {
+  var nav = document.querySelector('.nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+// ==================== DOM READY ====================
+document.addEventListener('DOMContentLoaded', function() {
+  initNav();
+  initStudio();
+  initScrollReveal();
+});
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(function(reg) { console.log('Service Worker registered'); })
+    .catch(function(err) { console.log('SW registration failed:', err); });
+}
+
+// PWA Install Prompt
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  showInstallBanner();
+});
+
+function showInstallBanner() {
+  var banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.innerHTML = '<div style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#a07060;color:white;padding:14px 24px;border-radius:16px;display:flex;align-items:center;gap:16px;box-shadow:0 8px 32px rgba(0,0,0,0.15);z-index:10000;font-family:Inter,sans-serif;max-width:90vw;"><span style="font-size:14px;">Install RoomEdit Pro as an app for quick access</span><button onclick="installApp()" style="background:white;color:#a07060;border:none;padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer;white-space:nowrap;font-size:13px;">Install</button><button onclick="this.parentElement.parentElement.remove()" style="background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:18px;padding:0 4px;">✕</button></div>';
+  document.body.appendChild(banner);
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(result) {
+      deferredPrompt = null;
+      var banner = document.getElementById('install-banner');
+      if (banner) banner.remove();
+    });
+  }
+}
+  </script>
+</body>
+</html>
