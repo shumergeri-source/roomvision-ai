@@ -2329,6 +2329,196 @@ font-weight: 600;
     grid-template-columns: 1fr;
   }
 }
+/* --- Auth Screen --- */
+.auth-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-screen.auth-hidden {
+  display: none;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 48px 40px 40px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.auth-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-input-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.auth-input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.auth-input-group input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.auth-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: 4px;
+}
+
+.auth-submit:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px var(--accent-glow-strong);
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-toggle {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 20px;
+}
+
+.auth-toggle a {
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.auth-toggle a:hover {
+  color: var(--accent-dark);
+}
+
+.auth-error {
+  background: rgba(220, 80, 80, 0.08);
+  border: 1px solid rgba(220, 80, 80, 0.2);
+  color: #c04040;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: none;
+}
+
+.auth-error.visible {
+  display: block;
+}
+
+/* --- User Menu in Nav --- */
+.nav-user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-user-email {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-logout-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: transparent;
+}
+
+.nav-logout-btn:hover {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.18);
+  color: var(--text-primary);
+}
+
+/* Hide main app content until authenticated */
+.app-content-wrapper.app-hidden {
+  display: none;
+}
+
 </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10022;</text></svg>">
   <link rel="manifest" href="manifest.json">
@@ -2337,8 +2527,38 @@ font-weight: 600;
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="RoomEdit Pro">
   <link rel="apple-touch-icon" href="icon-192.png">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+
+  <!-- ===== AUTH SCREEN ===== -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">&#10022;</div>
+        RoomEdit Pro
+      </div>
+      <p class="auth-subtitle" id="authSubtitle">Sign in to your design studio</p>
+      <div class="auth-error" id="authError"></div>
+      <form class="auth-form" id="authForm" onsubmit="return false;">
+        <div class="auth-input-group">
+          <label for="authEmail">Email</label>
+          <input type="email" id="authEmail" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="auth-input-group">
+          <label for="authPassword">Password</label>
+          <input type="password" id="authPassword" placeholder="Enter your password" required autocomplete="current-password" minlength="6">
+        </div>
+        <button type="submit" class="auth-submit" id="authSubmit">Sign In</button>
+      </form>
+      <div class="auth-toggle" id="authToggle">
+        Don't have an account? <a onclick="toggleAuthMode()">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN APP CONTENT ===== -->
+  <div id="appContentWrapper" class="app-content-wrapper app-hidden">
 
   <!-- ===== NAVIGATION ===== -->
   <nav class="nav">
@@ -2350,6 +2570,10 @@ font-weight: 600;
       <ul class="nav-links">
         <li><a href="#" class="nav-cta" style="pointer-events:none; opacity:0.7;">AI-Powered Design Studio</a></li>
       </ul>
+      <div class="nav-user-menu" id="navUserMenu" style="display:none;">
+        <span class="nav-user-email" id="navUserEmail"></span>
+        <button class="nav-logout-btn" onclick="handleLogout()">Log Out</button>
+      </div>
     </div>
   </nav>
 
@@ -2749,7 +2973,145 @@ font-weight: 600;
     </div>
   </footer>
 
+  </div><!-- /app-content-wrapper -->
+
   <script>
+/* ============================================
+   RoomEdit Pro — Supabase Auth
+   ============================================ */
+
+const SUPABASE_URL = 'https://xbheguzufoawoodxsxqf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_4fFIxzamPNLV7xoMUuUHGw_uUbtAhSA';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let authMode = 'login'; // 'login' or 'signup'
+
+function toggleAuthMode() {
+  authMode = authMode === 'login' ? 'signup' : 'login';
+  var subtitle = document.getElementById('authSubtitle');
+  var submit = document.getElementById('authSubmit');
+  var toggle = document.getElementById('authToggle');
+  var passwordInput = document.getElementById('authPassword');
+  var errorEl = document.getElementById('authError');
+  errorEl.classList.remove('visible');
+  errorEl.textContent = '';
+
+  if (authMode === 'signup') {
+    subtitle.textContent = 'Create your design studio account';
+    submit.textContent = 'Create Account';
+    toggle.innerHTML = 'Already have an account? <a onclick="toggleAuthMode()">Sign in</a>';
+    passwordInput.setAttribute('autocomplete', 'new-password');
+    passwordInput.setAttribute('placeholder', 'Create a password (min 6 chars)');
+  } else {
+    subtitle.textContent = 'Sign in to your design studio';
+    submit.textContent = 'Sign In';
+    toggle.innerHTML = 'Don\'t have an account? <a onclick="toggleAuthMode()">Sign up</a>';
+    passwordInput.setAttribute('autocomplete', 'current-password');
+    passwordInput.setAttribute('placeholder', 'Enter your password');
+  }
+}
+
+function showAuthError(msg) {
+  var errorEl = document.getElementById('authError');
+  errorEl.textContent = msg;
+  errorEl.classList.add('visible');
+}
+
+document.getElementById('authForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var email = document.getElementById('authEmail').value.trim();
+  var password = document.getElementById('authPassword').value;
+  var submitBtn = document.getElementById('authSubmit');
+  var errorEl = document.getElementById('authError');
+
+  errorEl.classList.remove('visible');
+  errorEl.textContent = '';
+  submitBtn.disabled = true;
+  submitBtn.textContent = authMode === 'login' ? 'Signing in...' : 'Creating account...';
+
+  try {
+    var result;
+    if (authMode === 'signup') {
+      result = await supabaseClient.auth.signUp({ email: email, password: password });
+    } else {
+      result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
+    }
+
+    if (result.error) {
+      var msg = result.error.message;
+      if (msg.includes('Invalid login')) msg = 'Invalid email or password.';
+      else if (msg.includes('already registered') || msg.includes('already been registered')) msg = 'This email is already registered. Try signing in.';
+      else if (msg.includes('Password should be')) msg = 'Password must be at least 6 characters.';
+      showAuthError(msg);
+      submitBtn.disabled = false;
+      submitBtn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
+      return;
+    }
+
+    // If signup returned a user but no session (email confirmation required), handle gracefully
+    if (authMode === 'signup' && result.data && result.data.user && !result.data.session) {
+      showAuthError('Account created! Check your email to confirm, then sign in.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Create Account';
+      return;
+    }
+
+    // Success — auth state listener will handle showing the app
+  } catch (err) {
+    showAuthError('Something went wrong. Please try again.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
+  }
+});
+
+function showApp(user) {
+  document.getElementById('authScreen').classList.add('auth-hidden');
+  document.getElementById('appContentWrapper').classList.remove('app-hidden');
+  var userMenu = document.getElementById('navUserMenu');
+  var userEmail = document.getElementById('navUserEmail');
+  if (user && user.email) {
+    userEmail.textContent = user.email;
+    userMenu.style.display = 'flex';
+  }
+}
+
+function showAuth() {
+  document.getElementById('authScreen').classList.remove('auth-hidden');
+  document.getElementById('appContentWrapper').classList.add('app-hidden');
+  document.getElementById('navUserMenu').style.display = 'none';
+  // Reset form
+  document.getElementById('authEmail').value = '';
+  document.getElementById('authPassword').value = '';
+  document.getElementById('authError').classList.remove('visible');
+  var submitBtn = document.getElementById('authSubmit');
+  submitBtn.disabled = false;
+  submitBtn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
+}
+
+async function handleLogout() {
+  await supabaseClient.auth.signOut();
+  showAuth();
+}
+
+// Auth state listener
+supabaseClient.auth.onAuthStateChange(function(event, session) {
+  if (session && session.user) {
+    showApp(session.user);
+  } else if (event === 'SIGNED_OUT') {
+    showAuth();
+  }
+});
+
+// Check existing session on load
+(async function() {
+  var result = await supabaseClient.auth.getSession();
+  if (result.data && result.data.session && result.data.session.user) {
+    showApp(result.data.session.user);
+  } else {
+    showAuth();
+  }
+})();
+
 /* ============================================
    RoomEdit Pro — Design Studio Logic
    ============================================ */
