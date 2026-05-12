@@ -1644,6 +1644,82 @@ font-weight: 600;
   line-height: 1.5;
 }
 
+/* What's In This Room */
+.room-items-panel {
+  margin-top: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e9ecef;
+}
+.room-items-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.room-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.room-item-card {
+  background: white;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid #eee;
+  transition: box-shadow 0.2s;
+}
+.room-item-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.room-item-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+.room-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.room-item-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a1a2e;
+  margin-bottom: 2px;
+}
+.room-item-brand {
+  font-size: 13px;
+  color: #6c63ff;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.room-item-brand.preferred {
+  color: #10b981;
+}
+.room-item-brand .preferred-badge {
+  background: #10b981;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.room-item-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
 /* Real product results (SerpAPI) */
 .serp-item-group {
   margin-top: 28px;
@@ -2612,6 +2688,12 @@ font-weight: 600;
             <span id="scaleCheckText"></span>
           </div>
 
+          <!-- What's In This Room panel -->
+          <div id="roomItemsPanel" class="room-items-panel" style="display:none;">
+            <div class="room-items-heading">🏷️ What's In This Design</div>
+            <div id="roomItemsList" class="room-items-list"></div>
+          </div>
+
           <div class="review-actions">
             <button class="btn-keep" onclick="keepChange()">&#9989; Keep This Change</button>
             <button class="btn-retry" onclick="retryChange()">&#128260; Try Again</button>
@@ -3054,6 +3136,66 @@ function getManufacturerUrl(brandName) {
   return null;
 }
 
+// ==================== WHAT'S IN THIS ROOM ====================
+function getCategoryIcon(category) {
+  var icons = {
+    'sofa': '🛋️', 'couch': '🛋️', 'table': '🪑', 'chair': '💺',
+    'lamp': '💡', 'light': '💡', 'rug': '🟫', 'carpet': '🟫',
+    'shelf': '📚', 'bookcase': '📚', 'bed': '🛏️', 'desk': '🖥️',
+    'mirror': '🪞', 'plant': '🌿', 'art': '🖼️', 'painting': '🖼️',
+    'cabinet': '🗄️', 'dresser': '🗄️', 'curtain': '🪟', 'other': '🏠'
+  };
+  if (!category) return '🏠';
+  var cat = category.toLowerCase();
+  return icons[cat] || '🏠';
+}
+
+function renderRoomItems(itemsPlaced) {
+  var panel = document.getElementById('roomItemsPanel');
+  var list = document.getElementById('roomItemsList');
+  
+  if (!itemsPlaced || itemsPlaced.length === 0) {
+    panel.style.display = 'none';
+    return;
+  }
+  
+  var manufacturers = getManufacturers();
+  var mfrNames = manufacturers.map(function(m) { return m.name.toLowerCase(); });
+  
+  var html = '';
+  itemsPlaced.forEach(function(item) {
+    var icon = getCategoryIcon(item.category);
+    var brandName = item.brand || 'Unknown';
+    var isPreferred = false;
+    
+    // Check if this brand matches a preferred manufacturer
+    var brandLower = brandName.toLowerCase();
+    for (var i = 0; i < mfrNames.length; i++) {
+      if (brandLower.indexOf(mfrNames[i]) !== -1 || mfrNames[i].indexOf(brandLower) !== -1) {
+        isPreferred = true;
+        break;
+      }
+    }
+    
+    var brandHtml = '<div class="room-item-brand' + (isPreferred ? ' preferred' : '') + '">' +
+      escHtml(brandName) +
+      (isPreferred ? '<span class="preferred-badge">✓ YOUR VENDOR</span>' : '') +
+      '</div>';
+    
+    html += '<div class="room-item-card">' +
+      '<div class="room-item-icon">' + icon + '</div>' +
+      '<div class="room-item-info">' +
+        '<div class="room-item-name">' + escHtml(item.name || 'Unknown Item') + '</div>' +
+        brandHtml +
+        '<div class="room-item-desc">' + escHtml(item.description || '') + '</div>' +
+      '</div>' +
+    '</div>';
+  });
+  
+  list.innerHTML = html;
+  panel.style.display = 'block';
+}
+
 // ==================== SERPAPI PRODUCT RENDERING ====================
 var _serpCardCounter = 0;
 
@@ -3450,7 +3592,14 @@ async function applyChange() {
     if (currentChangeType === 'item' && itemQty > 1) {
       analysisJobList += '\n4. Your change_instruction MUST start with "Place exactly ' + itemQty + ' of" — the quantity ' + itemQty + ' MUST appear in the change_instruction';
     }
-    analysisPrompt += '\nYour job is ONLY to:\n' + analysisJobList + '\n\nDo NOT redesign the placement. Do NOT suggest alternative locations. Do NOT omit placement details.\n\nReturn as JSON:\n{\n    "change_instruction": "Specific editing instruction that includes the user\'s EXACT placement words verbatim, the EXACT quantity requested, plus detailed visual description of the item/change",\n    "change_summary": "5-10 word summary of what changed",\n    "scale_assessment": "GOOD" or "CONCERN" or null,\n    "scale_details": "explanation" or null\n}';
+    var mfrText = getManufacturerPromptText();
+    if (mfrText) {
+      analysisPrompt += '\n\nITEM IDENTIFICATION: In your items_placed array, you MUST identify the specific brand, manufacturer, and model/product name for each piece of furniture. ' + mfrText + '\nFor items from preferred manufacturers, use the actual product names from those brands (e.g., "Restoration Hardware Cloud Sofa", "West Elm Mid-Century Dining Table"). For other items, give your best estimate of the brand and style name based on the visual appearance.';
+    } else {
+      analysisPrompt += '\n\nITEM IDENTIFICATION: In your items_placed array, identify the most likely brand and specific product/model name for each piece of furniture based on visual appearance. Be specific — say "Pottery Barn Comfort Roll Arm Sofa" not just "beige sofa".';
+    }
+
+    analysisPrompt += '\nYour job is ONLY to:\n' + analysisJobList + '\n\nDo NOT redesign the placement. Do NOT suggest alternative locations. Do NOT omit placement details.\n\nReturn as JSON:\n{\n    "change_instruction": "Specific editing instruction that includes the user\'s EXACT placement words verbatim, the EXACT quantity requested, plus detailed visual description of the item/change",\n    "change_summary": "5-10 word summary of what changed",\n    "scale_assessment": "GOOD" or "CONCERN" or null,\n    "scale_details": "explanation" or null,\n    "items_placed": [\n      {\n        "name": "Specific item name/model (e.g. Cloud Modular Sofa, Parsons Dining Table)",\n        "brand": "Brand/manufacturer name if identifiable or from preferred list, otherwise Best match estimate",\n        "description": "Brief visual description — material, color, style",\n        "category": "furniture category icon keyword: sofa, table, chair, lamp, rug, shelf, bed, desk, mirror, plant, art, cabinet, other"\n      }\n    ]\n}';
 
     // Build content parts with image(s)
     var roomContent = currentImage.split(',')[1];
@@ -3657,6 +3806,13 @@ async function applyChange() {
 
     // Reset product suggestions section (visible for all change types)
     document.getElementById('productResults').innerHTML = '';
+
+    // Show What's In This Room panel
+    if (parsed.items_placed && parsed.items_placed.length > 0) {
+      renderRoomItems(parsed.items_placed);
+    } else {
+      document.getElementById('roomItemsPanel').style.display = 'none';
+    }
 
     document.getElementById('studioReview').classList.add('active');
     document.getElementById('studioReview').scrollIntoView({ behavior: 'smooth' });
