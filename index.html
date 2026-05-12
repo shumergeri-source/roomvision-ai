@@ -3587,8 +3587,9 @@ async function applyChange() {
     }
 
     analysisPrompt += '\nABSOLUTE RULE — PLACEMENT IS LOCKED: If the user specified ANY placement or position (e.g., "to the left of the window", "next to the bed", "in the corner", "against the far wall"), you MUST copy their EXACT placement words into your change_instruction VERBATIM. Do NOT rephrase, relocate, or "improve" the placement. The user\'s placement is FINAL. If they said "to the left of the window", your change_instruction MUST say "to the left of the window" — not "near the window", not "by the wall", not anything else.\n';
+    analysisPrompt += '\nABSOLUTE RULE — ORIENTATION/FACING DIRECTION IS LOCKED: If the user specified which direction furniture should FACE, POINT, or be ORIENTED (e.g., "facing the TV", "pointing toward the window", "angled toward the fireplace", "with the back against the wall"), you MUST copy their EXACT orientation words into your change_instruction VERBATIM. Orientation is just as important as position. The seating side, front, or open side of the furniture MUST face the direction the user specified. If the user said "sofa facing the TV", the seat cushions and front of the sofa MUST face toward the TV — the back of the sofa must face AWAY from the TV. NEVER ignore, reverse, or override the facing direction. NEVER point furniture at a door, wall, or other object when the user said to face it toward something specific.\n';
 
-    var analysisJobList = '1. Describe the visual appearance of the item/change in detail (colors, materials, textures, style)\n2. Copy the user\'s placement instructions word-for-word into the change_instruction\n3. Add any relevant scale/proportion notes';
+    var analysisJobList = '1. Describe the visual appearance of the item/change in detail (colors, materials, textures, style)\n2. Copy the user\'s placement AND orientation/facing instructions word-for-word into the change_instruction — if the user said "facing the TV" or "pointing toward the window", those EXACT words must appear in your change_instruction\n3. Add any relevant scale/proportion notes';
     if (currentChangeType === 'item' && itemQty > 1) {
       analysisJobList += '\n4. Your change_instruction MUST start with "Place exactly ' + itemQty + ' of" — the quantity ' + itemQty + ' MUST appear in the change_instruction';
     }
@@ -3676,7 +3677,7 @@ async function applyChange() {
       imagePrompt += '*** QUANTITY RULE (HIGHEST PRIORITY): You MUST place EXACTLY ' + itemQty + ' (the number ' + itemQty + ') of the described item in the image. Count them: you need ' + itemQty + ' separate, individual, distinct copies of this item visible in the final image. Not 1, not ' + (itemQty - 1) + ', not ' + (itemQty + 1) + ' — exactly ' + itemQty + '. ***\n';
     }
     imagePrompt += '0. OUTPUT IMAGE SIZE AND FRAMING: Your output image MUST have the EXACT SAME aspect ratio, dimensions, and framing as the input room photo. If the input is landscape/wide, the output MUST be landscape/wide. If the input is portrait/tall, the output MUST be portrait/tall. Do NOT crop, zoom in, zoom out, or change the field of view in ANY way. The edges of the output must show the same content as the edges of the input. This is the #1 most important rule.\n';
-    imagePrompt += '1. PLACEMENT IS NON-NEGOTIABLE: The user\'s placement instruction below is FINAL. Place items EXACTLY where the user specified — not somewhere "better", not centered, not moved for aesthetics. EXACTLY where they said.\n';
+    imagePrompt += '1. PLACEMENT AND ORIENTATION ARE NON-NEGOTIABLE: The user\'s placement AND facing direction below are FINAL. Place items EXACTLY where the user specified AND orient them EXACTLY the direction the user said. If the user said "facing the TV", the FRONT/SEAT SIDE of the furniture MUST face toward the TV, and the BACK of the furniture faces AWAY from the TV. NEVER point furniture at a door, wall, or random direction when the user specified a facing target. The orientation matters as much as the position.\n';
     if (currentChangeType === 'item' && itemQty > 1) {
       imagePrompt += '2. Place EXACTLY ' + itemQty + ' of the item described below, and make NO other changes. Do NOT move, remove, resize, recolor, or alter ANY other element in the room.\n';
     } else {
@@ -3689,7 +3690,7 @@ async function applyChange() {
     imagePrompt += window._lastChangeDescription + '\n\n';
     imagePrompt += 'DETAILED VISUAL DESCRIPTION (use this for appearance details only, NOT for placement):\n';
     imagePrompt += parsed.change_instruction + '\n\n';
-    imagePrompt += 'REMINDER: Place the item EXACTLY where the user said in their original request above. Do not override their placement.\n\n';
+    imagePrompt += 'REMINDER: Place the item EXACTLY where the user said AND orient/face it EXACTLY the direction they specified. If they said "facing the TV" — the front of the furniture faces the TV, period. Do NOT override placement OR orientation.\n\n';
 
     if (studioItemBase64 && currentChangeType === 'item') {
       if (itemQty > 1) {
@@ -3723,7 +3724,7 @@ async function applyChange() {
     } else {
       imageSystemPrompt += ' You make exactly one minimal edit to room photographs.';
     }
-    imageSystemPrompt += ' ABSOLUTE REQUIREMENTS: 1) Your output image MUST have the EXACT same aspect ratio, resolution, and framing as the input photo. NEVER crop, zoom, or change the field of view. If the input is a wide landscape photo, the output must be the same wide landscape. Every edge of the photo must show the same content. 2) You NEVER change elements that were not explicitly requested. 3) You follow the user\'s placement instructions with 100% literal accuracy. If they say "to the left of the window" you place it to the left of the window. You NEVER choose a different location than what the user specified, even if you think another location would look better.';
+    imageSystemPrompt += ' ABSOLUTE REQUIREMENTS: 1) Your output image MUST have the EXACT same aspect ratio, resolution, and framing as the input photo. NEVER crop, zoom, or change the field of view. If the input is a wide landscape photo, the output must be the same wide landscape. Every edge of the photo must show the same content. 2) You NEVER change elements that were not explicitly requested. 3) You follow the user\'s placement AND ORIENTATION instructions with 100% literal accuracy. If they say "to the left of the window" you place it to the left of the window. If they say "facing the TV" the FRONT/SEATING SIDE of the furniture faces the TV and the BACK faces away. You NEVER choose a different location or facing direction than what the user specified, even if you think another arrangement would look better. Orientation/facing direction is just as mandatory as position.';
 
     var imageMessages = [
       {
